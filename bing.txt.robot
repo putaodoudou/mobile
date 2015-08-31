@@ -14,6 +14,17 @@ ${login}                ${NONE}
 ${password}             ${NONE}
 
 *** Test Cases ***
+Search Android Browser
+    Set Library Search Order    AppiumLibrary
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=${PLATFORM_NAME}
+    ...                 platformVersion=${PLATFORM_VERSION} app=${APP}
+    ...                 deviceName=${DEVICE_NAME}
+
+    Login   AppiumLibrary
+    :FOR      ${count}      in range    20
+    \   Search One  ${count}
+    #app=/Users/khe/Desktop/Firefox_19.0.apk
+    [TearDown]  Cleanup     AppiumLibrary
 
 Search 20 iOS Browser
     Set Library Search Order    AppiumLibrary
@@ -21,10 +32,10 @@ Search 20 iOS Browser
     ...                 deviceName=iPhone 6 	app=Safari
     AppiumLibrary.Wait Until Page Contains     Let's browse!  timeout=60
 
-    Login
-    :FOR      ${count}      in range    20
+    Login   AppiumLibrary
+    :FOR      ${count}      in range    22
     \   Search One  ${count}
-    [TearDown]  Cleanup
+    [TearDown]  Cleanup     AppiumLibrary
 
 Search iOS Browser
     [Documentation]     Mobile web browser
@@ -34,9 +45,9 @@ Search iOS Browser
     Set Library Search Order    AppiumLibrary
     AppiumLibrary.Wait Until Page Contains     Let's browse!  timeout=60
 
-    Login
-    Search Many     30
-    [TearDown]  Cleanup
+    Login   AppiumLibrary
+    Search Many     30      AppiumLibrary
+    [TearDown]  Cleanup     AppiumLibrary
 
 Search PC Browser
     [Documentation]     A test to open browser and close
@@ -45,8 +56,8 @@ Search PC Browser
     Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}     remote_url=${NONE}
     ...             desired_capabilities=${DC}
     Set Library Search Order    Selenium2Library
-    Login
-    Search Many     30
-    [TearDown]  Cleanup
+    Login   Selenium2Library
+    Search Many     30      Selenium2Library
+    [TearDown]  Cleanup     Selenium2Library
 
 
