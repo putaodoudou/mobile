@@ -14,6 +14,7 @@ ${login}                ${NONE}
 ${password}             ${NONE}
 
 *** Test Cases ***
+# todo http://mlb.com/dominono https://securea.mlb.com/d/stluV/oAj5EwRiE7/rLugOUWr9/entry.jsp
 Search Android Browser
     Set Library Search Order    AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=${PLATFORM_NAME}
@@ -23,7 +24,6 @@ Search Android Browser
     Login   AppiumLibrary
     :FOR      ${count}      in range    20
     \   Search One  ${count}
-    #app=/Users/khe/Desktop/Firefox_19.0.apk
     [TearDown]  Cleanup     AppiumLibrary
 
 Search 20 iOS Browser
@@ -59,5 +59,3 @@ Search PC Browser
     Login   Selenium2Library
     Search Many     30      Selenium2Library
     [TearDown]  Cleanup     Selenium2Library
-
-

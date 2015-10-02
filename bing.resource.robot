@@ -7,6 +7,7 @@ Documentation     A resource file with reusable keywords and variables.
 ...               @version 1.0.$Id$
 Library         Selenium2Library
 Library         AppiumLibrary
+Library         String
 
 
 *** Variables ***
@@ -16,15 +17,16 @@ ${PLATFORM_NAME}    Android
 ${PLATFORM_VERSION}    4.4.2
 ${DEVICE_NAME}    Android Emulator
 ${APP}          Chrome
-${to}               60
+${to}               600
 
 
 *** Keywords ***
 Go to Generic
-    #todo run only one when one fails
+    # todo run only one when one fails
     [Arguments]     ${URL}      ${lib}
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Go to         ${URL}
     ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Go to URL     ${URL}
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         AppiumLibrary.Capture Page Screenshot
 
 Cleanup
     [Arguments]     ${lib}
@@ -37,7 +39,9 @@ Search Many
     :FOR      ${count}      in range    ${total}
     \   Wait Until Page Contains Element    name=go
     \   ${status}=      Run Keyword And Ignore Error      Clear text          name=q
-    \   Input text          name=q     ${count}
+    \   ${random}   Generate Random String  ${count}   [NUMBERS]
+    \   Input text          name=q     ${random}
+    \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=go     timeout=${to}
     \   Click Element       name=go
     \   Wait Until Page Contains     Feedback
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
@@ -48,7 +52,6 @@ Login
     Set Test Variable      ${bingsignin}   https://www.bing.com/fd/auth/signin?action=interactive&provider=windows_live_id
     Set Test Variable      ${ref}         &return_url=https%3a%2f%2fwww.bing.com%2frewards%2fdashboard%3fwlexpsignin%3d1
     Go to Generic       ${bingsignin}${ref}&src=EXPLICIT&sig=436FFF70C696439D84D126C03DE514D0    ${lib}
-    #Go to Generic       https://login.live.com
     Wait Until Page Contains Element    name=loginfmt   timeout=${to}
     Input text          name=loginfmt      ${login}
     Input text          name=passwd        ${password}
@@ -63,5 +66,6 @@ Search One
     Wait Until Page Contains Element    name=go     timeout=${to}
     Clear text          name=q
     Input text          name=q     ${searchword}
+    Run Keyword And Ignore Error    Wait Until Page Contains Element    name=go     timeout=${to}
     Click Element       name=go
     Wait Until Page Contains     Feedback       timeout=${to}
