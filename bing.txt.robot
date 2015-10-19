@@ -28,7 +28,7 @@ Search Android Browser
 
 Search 20 iOS Browser
     Set Library Search Order    AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=8.4
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=9.0
     ...                 deviceName=iPhone 6 	app=Safari
     AppiumLibrary.Wait Until Page Contains     Let's browse!  timeout=60
 
@@ -37,10 +37,16 @@ Search 20 iOS Browser
     \   Search One  ${count}
     [TearDown]  Cleanup     AppiumLibrary
 
+Interactive
+    [Documentation]     Install Whatapp 
+    [Tags]    Whatapp
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=9.0
+    ...                 deviceName=iPhone 6 	app=Safari
+
 Search iOS Browser
     [Documentation]     Mobile web browser
     [Tags]    Mobile
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=8.4
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=9.0
     ...                 deviceName=iPhone 6 	app=Safari
     Set Library Search Order    AppiumLibrary
     AppiumLibrary.Wait Until Page Contains     Let's browse!  timeout=60

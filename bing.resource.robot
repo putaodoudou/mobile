@@ -17,7 +17,7 @@ ${PLATFORM_NAME}    Android
 ${PLATFORM_VERSION}    4.4.2
 ${DEVICE_NAME}    Android Emulator
 ${APP}          Chrome
-${to}               600
+${to}               6000
 
 
 *** Keywords ***
@@ -39,7 +39,7 @@ Search Many
     :FOR      ${count}      in range    ${total}
     \   Wait Until Page Contains Element    name=go
     \   ${status}=      Run Keyword And Ignore Error      Clear text          name=q
-    \   ${random}   Generate Random String  ${count}   [NUMBERS]
+    \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
     \   Input text          name=q     ${random}
     \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=go     timeout=${to}
     \   Click Element       name=go
