@@ -11,43 +11,48 @@ Library         String
 
 
 *** Variables ***
-${REMOTE_URL}   http://localhost:4723/wd/hub
-# saved for android
-${PLATFORM_NAME}    Android
-${PLATFORM_VERSION}    4.4.2
-${DEVICE_NAME}    Android Emulator
-${APP}          Chrome
-${to}               6000
+${REMOTE_URL}       http://localhost:4723/wd/hub
+${APP}              Chrome
+${to}               60
 
+# saved for android
+${PLATFORM_NAME}        Android
+${PLATFORM_VERSION}     4.4.2
+${DEVICE_NAME}          Android Emulator
 
 *** Keywords ***
 Go to Generic
-    # todo run only one when one fails
+    [Documentation]	Go to API calls with right library from Appium or PC browser
     [Arguments]     ${URL}      ${lib}
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Go to         ${URL}
     ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Go to URL     ${URL}
     ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         AppiumLibrary.Capture Page Screenshot
 
 Cleanup
+    [Documentation]	Run only one when one fails with the right API calls from Appium or PC browser
     [Arguments]     ${lib}
-    #todo run only one when one fails
     ${status}=      Run Keyword If    '${lib}' == 'Selenium2Library'    Close Browser
     ${status}=      Run Keyword If    '${lib}' == 'AppiumLibrary'       Close Application
 
 Search Many
+    [Documentation]	Search multiple entries, caller is expected to call tear down
     [Arguments]     ${total}    ${lib}
     :FOR      ${count}      in range    ${total}
-    \   Wait Until Page Contains Element    name=go
+    \   Wait Until Page Contains Element    name=q
+    \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
     \   ${status}=      Run Keyword And Ignore Error      Clear text          name=q
     \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
-    \   Input text          name=q     ${random}
+    \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
+    \   Run Keyword And Ignore Error	Input text          name=q     ${random}
+    \   Log	${random}
     \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=go     timeout=${to}
-    \   Click Element       name=go
+    \   Run Keyword And Ignore Error	Click Element       name=go
+    \   Log Many	${to}	${count}
     \   Wait Until Page Contains     Feedback
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
-    [Teardown]  Cleanup     ${lib}
 
 Login
+    [Documentation]	Login to bing with credentials
     [Arguments]     ${lib}
     Set Test Variable      ${bingsignin}   https://www.bing.com/fd/auth/signin?action=interactive&provider=windows_live_id
     Set Test Variable      ${ref}         &return_url=https%3a%2f%2fwww.bing.com%2frewards%2fdashboard%3fwlexpsignin%3d1
@@ -62,10 +67,12 @@ Login
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
 
 Search One
+    [Documentation]	Search one and a time
     [Arguments]     ${searchword}
-    Wait Until Page Contains Element    name=go     timeout=${to}
+    Wait Until Page Contains Element    name=q     timeout=${to}
     Clear text          name=q
-    Input text          name=q     ${searchword}
+    Run Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
+    Run Keyword And Ignore Error    Input text          name=q     ${searchword}
     Run Keyword And Ignore Error    Wait Until Page Contains Element    name=go     timeout=${to}
-    Click Element       name=go
+    Run Keyword And Ignore Error    Click Element       name=go
     Wait Until Page Contains     Feedback       timeout=${to}
