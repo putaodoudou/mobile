@@ -1,8 +1,15 @@
 # PC/mobile
-PC/Mobile robotframework support for iOS and Android testing
+PC/Mobile robotframework support for iOS and Android testing. Install all below for MacOsX 10.10.4
 
-Robot Framework installation:
+  Download xcode 6.4 in below link:
+    http://adcdownload.apple.com/Developer_Tools/Xcode_6.4/Xcode_6.4.dmg
+
+  Download appium Version 1.4.8 (Draco)
+    https://bitbucket.org/appium/appium.app/downloads/appium-1.4.8.dmg
+
+  Robot Framework installation:
     # standard PC support
+
     easy_install pip
     pip install robotframework-selenium2library
     
