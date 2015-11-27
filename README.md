@@ -38,4 +38,10 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     3f) put in /Users/khe/Library/Android/sdk in Appium's android advance setting
     3g) run RB test files
 
-   
+  Cmdline:
+    iPhone:
+
+    pybot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
+
+    iPad 2:
+    pybot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPad 2" -v pVersion:7.1 -t "Search iOS Browser" bing.txt.robot

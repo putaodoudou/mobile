@@ -41,10 +41,10 @@ Search 20 iOS Browser
     [TearDown]  Cleanup     AppiumLibrary
 
 Interactive
-    [Documentation]     Install Whatapp 
-    [Tags]    Whatapp
+    [Documentation]     Run Bing
+    [Tags]    Bing
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
-    ...                 deviceName=${device}	app=Safari
+    ...                 deviceName=${device}	app=/Applications/Appium.app/Contents/Resources/node_modules/appium/Bing.ipa
 
 Search iOS Browser
     [Documentation]     Mobile web browser
