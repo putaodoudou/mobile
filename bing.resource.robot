@@ -38,14 +38,13 @@ Search Many
     [Documentation]	Search multiple entries, caller is expected to call tear down
     [Arguments]     ${total}    ${lib}
     :FOR      ${count}      in range    ${total}
-    \   Wait Until Page Contains Element    name=q
-    \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
+    \   Wait Until Page Contains Element    name=q     timeout=${to}
     \   ${status}=      Run Keyword And Ignore Error      Clear text          name=q
     \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
-    \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
+    \   Wait Until Page Contains Element    name=q     timeout=${to}
     \   Run Keyword And Ignore Error	Input text          name=q     ${random}
     \   Log	${random}
-    \   Run Keyword And Ignore Error    Wait Until Page Contains Element    name=go     timeout=${to}
+    \   Wait Until Page Contains Element    name=go     timeout=${to}
     \   Run Keyword And Ignore Error	Click Element       name=go
     \   Log Many	${to}	${count}
     \   Wait Until Page Contains     Feedback
@@ -71,8 +70,8 @@ Search One
     [Arguments]     ${searchword}
     Wait Until Page Contains Element    name=q     timeout=${to}
     Clear text          name=q
-    Run Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
+    Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
     Run Keyword And Ignore Error    Input text          name=q     ${searchword}
-    Run Keyword And Ignore Error    Wait Until Page Contains Element    name=go     timeout=${to}
+    Wait Until Page Contains Element    name=go     timeout=${to}
     Run Keyword And Ignore Error    Click Element       name=go
     Wait Until Page Contains     Feedback       timeout=${to}
