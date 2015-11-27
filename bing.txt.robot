@@ -66,5 +66,5 @@ Search PC Browser
     ...             desired_capabilities=${DC}
     Set Library Search Order    Selenium2Library
     Login   Selenium2Library
-    Search Many     30      Selenium2Library
+    Search Many     32      Selenium2Library
     [TearDown]  Cleanup     Selenium2Library
