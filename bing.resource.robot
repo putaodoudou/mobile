@@ -42,12 +42,13 @@ Search Many
     \   ${status}=      Run Keyword And Ignore Error      Clear text          name=q
     \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
     \   Wait Until Page Contains Element    name=q     timeout=${to}
-    \   Run Keyword And Ignore Error	Input text          name=q     ${random}
+    \   Run Keyword And Ignore Error	Input text          name=q     ${random}\n
     \   Log	${random}
     \   Wait Until Page Contains Element    name=go     timeout=${to}
-    \   Run Keyword And Ignore Error	Click Element       name=go
+    \   Run Keyword And Ignore Error   Click Element       name=go
     \   Log Many	${to}	${count}
     \   Wait Until Page Contains     Feedback
+    #FIXME for debugging \   Builtin.Sleep	5
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
 
 Login
