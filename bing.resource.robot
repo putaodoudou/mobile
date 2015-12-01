@@ -45,7 +45,6 @@ Search Many
     \   Run Keyword And Ignore Error	Input text          name=q     ${random}\n
     \   Log	${random}
     \   Wait Until Page Contains Element    name=go     timeout=${to}
-    \   Run Keyword And Ignore Error   Click Element       name=go
     \   Log Many	${to}	${count}
     \   Wait Until Page Contains     Feedback
     #FIXME for debugging \   Builtin.Sleep	5
