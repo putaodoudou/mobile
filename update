@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "checking for report"
+grep -i "All tests passed" report.html
