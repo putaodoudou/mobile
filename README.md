@@ -16,6 +16,7 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     # optional browser support
     pip install chromedriver_installer
     pip install requests
+    pip install pabot
     
     # mobile support (see https://github.com/kenneyhe/mobile.git)
     1) pip install robotframework-appiumlibrary
@@ -42,6 +43,7 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     iPhone:
 
     pybot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
+    pabot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
 
     iPad 2:
     pybot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPad 2" -v pVersion:7.1 -t "Search iOS Browser" bing.txt.robot
