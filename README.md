@@ -42,8 +42,8 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
   Cmdline:
     iPhone:
 
-    pybot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
-    pabot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
+    pybot -v BROWSER:firefox -v login:<secret> -v DC:"browserName:firefox,version:41" -v password:<secret> -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
+    pabot -v BROWSER:firefox -v login:<secret> -v DC:"browserName:firefox,version:41" -v password:<secret> -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
 
     iPad 2:
-    pybot -v BROWSER:firefox -v login:kenney@e8security.com -v DC:"browserName:firefox,version:41" -v password:Passw1rd123! -v device:"iPad 2" -v pVersion:7.1 -t "Search iOS Browser" bing.txt.robot
+    pybot -v BROWSER:firefox -v login:<secret> -v DC:"browserName:firefox,version:41" -v password:<secret> -v device:"iPad 2" -v pVersion:7.1 -t "Search iOS Browser" bing.txt.robot
