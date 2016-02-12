@@ -5,8 +5,6 @@ Documentation     An acceptance test suite to verify bing features.
 ...               the imported resource file.
 ...               @version 1.0.$Id$
 Resource          bing.resource.robot
-Library           Selenium2Library
-Library           AppiumLibrary
 
 *** Variables ***
 ${DC}                   {"browserName:firefox,version:41"}
@@ -18,26 +16,27 @@ ${pVersion}		8.4
 *** Test Cases ***
 # todo http://mlb.com/dominono https://securea.mlb.com/d/stluV/oAj5EwRiE7/rLugOUWr9/entry.jsp
 Search Android Browser
+    Import Library		AppiumLibrary
     Set Library Search Order    AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=${PLATFORM_NAME}
     ...                 platformVersion=${PLATFORM_VERSION} app=${APP}
     ...                 deviceName=${DEVICE_NAME}
 
-    #Login   AppiumLibrary
     Search Test		AppiumLibrary
     :FOR      ${count}      in range    20
-    \   Search One  ${count}
+    \   Search One  ${count}	AppiumLibrary
     [TearDown]  Cleanup     AppiumLibrary
 
 Search 20 iOS Browser
+    Import Library		AppiumLibrary
     Set Library Search Order    AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
     ...                 deviceName=${device}	app=Safari
-    AppiumLibrary.Wait Until Page Contains     Let's browse!  timeout=60
+    Wait Until Page Contains     Let's browse!  timeout=60
 
     Login   AppiumLibrary
     :FOR      ${count}      in range    22
-    \   Search One  ${count}
+    \   Search One  ${count}	AppiumLibrary
     [TearDown]  Cleanup     AppiumLibrary
 
 Interactive
@@ -49,10 +48,11 @@ Interactive
 Search iOS Browser
     [Documentation]     Mobile web browser
     [Tags]    Mobile
+    Import Library		AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
     ...                 deviceName=${device}	app=Safari
     Set Library Search Order    AppiumLibrary
-    AppiumLibrary.Wait Until Page Contains     Let's browse!  timeout=60
+    Wait Until Page Contains    Let's browse!  timeout=60
 
     Login   AppiumLibrary
     Search Many     30      AppiumLibrary
@@ -61,6 +61,7 @@ Search iOS Browser
 Search PC Browser
     [Documentation]     A test to open browser and close
     [Tags]  PC
+    Import Library	Selenium2Library
     Set Test Variable   ${capabilities}    ${NONE}
     Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}     remote_url=${NONE}
     ...             desired_capabilities=${DC}

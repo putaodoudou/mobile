@@ -5,10 +5,7 @@ Documentation     A resource file with reusable keywords and variables.
 ...               domain specific language. They utilize keywords provided
 ...               by the imported Selenium2Library
 ...               @version 1.0.$Id$
-Library         Selenium2Library
-Library         AppiumLibrary
 Library         String
-
 
 *** Variables ***
 ${REMOTE_URL}       http://localhost:4723/wd/hub
@@ -37,9 +34,12 @@ Cleanup
 Search Many
     [Documentation]	Search multiple entries, caller is expected to call tear down
     [Arguments]     ${total}    ${lib}
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
     :FOR      ${count}      in range    ${total}
     \   Wait Until Page Contains Element    name=q     timeout=${to}
-    \   ${status}=      Run Keyword And Ignore Error      Clear text          name=q
+    \   Run Keyword If  '${lib}' == 'AppiumLibrary'         Run Keyword And Ignore Error      Clear Text          name=q
+    \   Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error      Clear Element Text          name=q
     \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
     \   Wait Until Page Contains Element    name=q     timeout=${to}
     \   Run Keyword And Ignore Error	Input text          name=q     ${random}\n
@@ -53,6 +53,8 @@ Search Many
 Login
     [Documentation]	Login to bing with credentials
     [Arguments]     ${lib}
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
     Set Test Variable      ${bingsignin}   https://www.bing.com/fd/auth/signin?action=interactive&provider=windows_live_id
     Set Test Variable      ${ref}         &return_url=https%3a%2f%2fwww.bing.com%2frewards%2fdashboard%3fwlexpsignin%3d1
     Go to Generic       ${bingsignin}${ref}&src=EXPLICIT&sig=436FFF70C696439D84D126C03DE514D0    ${lib}
@@ -67,9 +69,12 @@ Login
 
 Search One
     [Documentation]	Search one and a time
-    [Arguments]     ${searchword}
+    [Arguments]     ${searchword}	${lib}
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
     Wait Until Page Contains Element    name=q     timeout=${to}
-    Clear text          name=q
+    Run Keyword If  '${lib}' == 'AppiumLibrary'         Clear Text                  name=q
+    Run Keyword If  '${lib}' == 'Selenium2Library'      Clear Element Text          name=q
     Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
     Run Keyword And Ignore Error    Input text          name=q     ${searchword}
     Wait Until Page Contains Element    name=go     timeout=${to}
