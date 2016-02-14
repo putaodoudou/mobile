@@ -64,9 +64,10 @@ Login
     Input text          name=loginfmt      ${login}
     Input text          name=passwd        ${password}
     Click Element       name=SI
-    # TODO handle it by selecting Text and Next. next pass with say I have a code
     Log Source		loglevel=DEBUG
-    ${status}=      Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
+    # TODO handle it by selecting Text and Next. next pass with say I have a code
+    #Run Keyword If  '${lib}' == 'AppiumLibrary'         ${status}=      Run Keyword And Ignore Error	Page Should Not Contain Text	${BING_VERIFY}
+    Run Keyword If  '${lib}' == 'Selenium2Library'      ${status}=      Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
     Run Keyword If 	${status} == 'FAIL'	Wait Until Page Contains    Bing Rewards    timeout=${to}
     Run Keyword If 	${status} == 'PASS'	Choose Ok On Next Confirmation
 
