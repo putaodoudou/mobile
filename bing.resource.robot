@@ -16,6 +16,7 @@ ${to}               60
 ${PLATFORM_NAME}        Android
 ${PLATFORM_VERSION}     4.4.2
 ${DEVICE_NAME}          Android Emulator
+${BING_VERIFY}          We've detected something unusual
 
 *** Keywords ***
 Go to Generic
@@ -58,11 +59,16 @@ Login
     Set Test Variable      ${bingsignin}   https://www.bing.com/fd/auth/signin?action=interactive&provider=windows_live_id
     Set Test Variable      ${ref}         &return_url=https%3a%2f%2fwww.bing.com%2frewards%2fdashboard%3fwlexpsignin%3d1
     Go to Generic       ${bingsignin}${ref}&src=EXPLICIT&sig=436FFF70C696439D84D126C03DE514D0    ${lib}
+    Log Source		loglevel=DEBUG
     Wait Until Page Contains Element    name=loginfmt   timeout=${to}
     Input text          name=loginfmt      ${login}
     Input text          name=passwd        ${password}
     Click Element       name=SI
-    Wait Until Page Contains    Bing Rewards    timeout=${to}
+    # TODO handle it by selecting Text and Next. next pass with say I have a code
+    Log Source		loglevel=DEBUG
+    ${status}=      Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
+    Run Keyword If 	${status} == 'FAIL'	Wait Until Page Contains    Bing Rewards    timeout=${to}
+    Run Keyword If 	${status} == 'PASS'	Choose Ok On Next Confirmation
 
     Set Test Variable      ${bingsignin}    https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
