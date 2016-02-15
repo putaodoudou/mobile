@@ -66,10 +66,10 @@ Login
     Click Element       name=SI
     Log Source		loglevel=DEBUG
     # TODO handle it by selecting Text and Next. next pass with say I have a code
-    #Run Keyword If  '${lib}' == 'AppiumLibrary'         ${status}=      Run Keyword And Ignore Error	Page Should Not Contain Text	${BING_VERIFY}
-    Run Keyword If  '${lib}' == 'Selenium2Library'      ${status}=      Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
-    Run Keyword If 	${status} == 'FAIL'	Wait Until Page Contains    Bing Rewards    timeout=${to}
-    Run Keyword If 	${status} == 'PASS'	Choose Ok On Next Confirmation
+    ${status}=		Run Keyword If  '${lib}' == 'AppiumLibrary'         Run Keyword And Ignore Error	Page Should Not Contain Text	${BING_VERIFY}
+    ${status}=		Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
+    Run Keyword If 	${status} == 'None'	Choose Ok On Next Confirmation
+    ...		ELSE	Wait Until Page Contains    Bing Rewards    timeout=${to}
 
     Set Test Variable      ${bingsignin}    https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
