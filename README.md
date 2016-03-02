@@ -47,3 +47,13 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
 
     iPad 2:
     pybot -v BROWSER:firefox -v login:<secret> -v DC:"browserName:firefox,version:41" -v password:<secret> -v device:"iPad 2" -v pVersion:7.1 -t "Search iOS Browser" bing.txt.robot
+
+
+Troubleshooting:
+  Older MacOS 10.6 can have below error and solution:
+    1) TypeError: wait_until_page_contains_element() keywords must be strings
+       use Run and igore
+    2) TypeError: log_source() keywords must be strings
+       remove loglevel=DEBUG
+    3) open_browser() keywords must be strings
+       remove arguments and install missing firefox if necessary
