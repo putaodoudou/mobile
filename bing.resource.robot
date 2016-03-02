@@ -38,14 +38,14 @@ Search Many
     ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
     :FOR      ${count}      in range    ${total}
-    \   Wait Until Page Contains Element    name=q     timeout=${to}
+    \   Wait Until Page Contains Element    name=q
     \   Run Keyword If  '${lib}' == 'AppiumLibrary'         Run Keyword And Ignore Error      Clear Text          name=q
     \   Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error      Clear Element Text          name=q
     \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
-    \   Wait Until Page Contains Element    name=q     timeout=${to}
+    \   Wait Until Page Contains Element    name=q
     \   Run Keyword And Ignore Error	Input text          name=q     ${random}\n
     \   Log	${random}
-    \   Wait Until Page Contains Element    name=go     timeout=${to}
+    \   Wait Until Page Contains Element    name=go
     \   Log Many	${to}	${count}
     \   Wait Until Page Contains     Feedback
     #FIXME for debugging \   Builtin.Sleep	5
@@ -59,21 +59,22 @@ Login
     Set Test Variable      ${bingsignin}   https://www.bing.com/fd/auth/signin?action=interactive&provider=windows_live_id
     Set Test Variable      ${ref}         &return_url=https%3a%2f%2fwww.bing.com%2frewards%2fdashboard%3fwlexpsignin%3d1
     Go to Generic       ${bingsignin}${ref}&src=EXPLICIT&sig=436FFF70C696439D84D126C03DE514D0    ${lib}
-    Log Source		loglevel=DEBUG
-    Wait Until Page Contains Element    name=loginfmt   timeout=${to}
+    Set Log Level	DEBUG
+    Log Source
+    Wait Until Page Contains Element		name=loginfmt
     Input text          name=loginfmt      ${login}
     Input text          name=passwd        ${password}
     Click Element       name=SI
-    Log Source		loglevel=DEBUG
+    Log Source
     # TODO handle it by selecting Text and Next. next pass with say I have a code
     ${status}=		Run Keyword If  '${lib}' == 'AppiumLibrary'
     ...         Run Keyword And Ignore Error	Page Should Not Contain Text	${BING_VERIFY}
     ${status}=		Run Keyword If  '${lib}' == 'Selenium2Library'
     ...         Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
     Run Keyword If 	${status} == 'None'	Choose Ok On Next Confirmation
-    \	        ELSEIF      '${status[0]}' == 'PASS'	Choose Ok On Next Confirmation
-    \           ELSE        Wait Until Page Contains    Bing Rewards    timeout=${to}
-    
+    ...		ELSEIF	${status[0]} == 'PASS'	 Choose Ok On Next Confirmation
+    ...		ELSE    Wait Until Page Contains    Bing Rewards
+
     Set Test Variable      ${bingsignin}    https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
 
@@ -82,11 +83,11 @@ Search One
     [Arguments]     ${searchword}	${lib}
     ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
-    Wait Until Page Contains Element    name=q     timeout=${to}
+    Wait Until Page Contains Element    name=q
     Run Keyword If  '${lib}' == 'AppiumLibrary'         Clear Text                  name=q
     Run Keyword If  '${lib}' == 'Selenium2Library'      Clear Element Text          name=q
-    Keyword And Ignore Error    Wait Until Page Contains Element    name=q     timeout=${to}
+    Keyword And Ignore Error    Wait Until Page Contains Element    name=q
     Run Keyword And Ignore Error    Input text          name=q     ${searchword}
-    Wait Until Page Contains Element    name=go     timeout=${to}
+    Wait Until Page Contains Element    name=go
     Run Keyword And Ignore Error    Click Element       name=go
-    Wait Until Page Contains     Feedback       timeout=${to}
+    Wait Until Page Contains     Feedback

@@ -32,7 +32,7 @@ Search 20 iOS Browser
     Set Library Search Order    AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
     ...                 deviceName=${device}	app=Safari
-    Wait Until Page Contains     Let's browse!  timeout=60
+    Wait Until Page Contains     Let's browse!
 
     Login   AppiumLibrary
     :FOR      ${count}      in range    22
@@ -52,7 +52,7 @@ Search iOS Browser
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
     ...                 deviceName=${device}	app=Safari
     Set Library Search Order    AppiumLibrary
-    Wait Until Page Contains    Let's browse!  timeout=60
+    Wait Until Page Contains    Let's browse!
 
     Login   AppiumLibrary
     Search Many     30      AppiumLibrary
@@ -63,8 +63,9 @@ Search PC Browser
     [Tags]  PC
     Import Library	Selenium2Library
     Set Test Variable   ${capabilities}    ${NONE}
-    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}     remote_url=${NONE}
-    ...             desired_capabilities=${DC}
+    Set Test Variable   ${desired_capabilities}		${DC}
+    Set Test Variable   ${remote_url}			${NONE}
+    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}
     Set Library Search Order    Selenium2Library
     Login   Selenium2Library
     Search Many     32      Selenium2Library
