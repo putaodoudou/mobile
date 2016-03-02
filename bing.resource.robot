@@ -71,9 +71,9 @@ Login
     ${status}=		Run Keyword If  '${lib}' == 'Selenium2Library'
     ...         Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
     Run Keyword If 	${status} == 'None'	Choose Ok On Next Confirmation
-    ...	        ELSEIF      '${status}' == 'PASS'	Choose Ok On Next Confirmation
-    ...         ELSE        Wait Until Page Contains    Bing Rewards    timeout=${to}
-
+    \	        ELSEIF      '${status[0]}' == 'PASS'	Choose Ok On Next Confirmation
+    \           ELSE        Wait Until Page Contains    Bing Rewards    timeout=${to}
+    
     Set Test Variable      ${bingsignin}    https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
     Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
 
