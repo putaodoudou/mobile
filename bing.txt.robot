@@ -30,7 +30,8 @@ Search Android Browser
 Search 20 iOS Browser
     Import Library		AppiumLibrary
     Set Library Search Order    AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS
+    ...                 platformVersion=${pVersion}
     ...                 deviceName=${device}	app=Safari
     Wait Until Page Contains     Let's browse!
 
@@ -42,15 +43,17 @@ Search 20 iOS Browser
 Interactive
     [Documentation]     Run Bing
     [Tags]    Bing
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
-    ...                 deviceName=${device}	app=/Applications/Appium.app/Contents/Resources/node_modules/appium/Bing.ipa
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS
+    ...                 platformVersion=${pVersion}
+    ...                 deviceName=${device}
+    ...                 app=/Applications/Appium.app/Contents/Resources/node_modules/appium/Bing.ipa
 
 Search iOS Browser
     [Documentation]     Mobile web browser
     [Tags]    Mobile
     Import Library		AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS	platformVersion=${pVersion}
-    ...                 deviceName=${device}	app=Safari
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS
+    ...                 platformVersion=${pVersion} deviceName=${device}	app=Safari
     Set Library Search Order    AppiumLibrary
     Wait Until Page Contains    Let's browse!
 

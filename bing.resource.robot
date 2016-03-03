@@ -24,7 +24,8 @@ Go to Generic
     [Arguments]     ${URL}      ${lib}
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Go to         ${URL}
     ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Go to URL     ${URL}
-    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         AppiumLibrary.Capture Page Screenshot
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'
+    ...                 AppiumLibrary.Capture Page Screenshot
 
 Cleanup
     [Documentation]	Run only one when one fails with the right API calls from Appium or PC browser
@@ -35,12 +36,16 @@ Cleanup
 Search Many
     [Documentation]	Search multiple entries, caller is expected to call tear down
     [Arguments]     ${total}    ${lib}
-    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
-    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'
+    ...                 Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
+    ...                 Import Library		Selenium2Library
     :FOR      ${count}      in range    ${total}
     \   Wait Until Page Contains Element    name=q
-    \   Run Keyword If  '${lib}' == 'AppiumLibrary'         Run Keyword And Ignore Error      Clear Text          name=q
-    \   Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error      Clear Element Text          name=q
+    \   Run Keyword If  '${lib}' == 'AppiumLibrary'         Run Keyword And Ignore Error
+    ...     Clear Text          name=q
+    \   Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error
+    ...     Clear Element Text          name=q
     \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
     \   Wait Until Page Contains Element    name=q
     \   Run Keyword And Ignore Error	Input text          name=q     ${random}\n
@@ -49,16 +54,25 @@ Search Many
     \   Log Many	${to}	${count}
     \   Wait Until Page Contains     Feedback
     #FIXME for debugging \   Builtin.Sleep	5
-    Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
+    Go to Generic   ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
+    ...             ${lib}
 
 Login
     [Documentation]	Login to bing with credentials
     [Arguments]     ${lib}
-    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
-    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
-    Set Test Variable      ${bingsignin}   https://www.bing.com/fd/auth/signin?action=interactive&provider=windows_live_id
-    Set Test Variable      ${ref}         &return_url=https%3a%2f%2fwww.bing.com%2frewards%2fdashboard%3fwlexpsignin%3d1
-    Go to Generic       ${bingsignin}${ref}&src=EXPLICIT&sig=436FFF70C696439D84D126C03DE514D0    ${lib}
+    ${status}=
+    ...             Run Keyword If  '${lib}' == 'AppiumLibrary'
+    ...                 Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
+    ...                 Import Library		Selenium2Library
+    Set Test Variable
+    ...             ${bingsignin}
+    ...             https://www.bing.com/fd/auth/signin?action=interactive&provider=windows_live_id
+    Set Test Variable
+    ...             ${ref}
+    ...             &return_url=https%3a%2f%2fwww.bing.com%2frewards%2fdashboard%3fwlexpsignin%3d1
+    Go to Generic
+    ...             ${bingsignin}${ref}&src=EXPLICIT&sig=436FFF70C696439D84D126C03DE514D0    ${lib}
     Set Log Level	DEBUG
     Log Source
     Wait Until Page Contains Element		name=loginfmt
@@ -75,14 +89,19 @@ Login
     ...		ELSEIF	${status[0]} == 'PASS'	 Choose Ok On Next Confirmation
     ...		ELSE    Wait Until Page Contains    Bing Rewards
 
-    Set Test Variable      ${bingsignin}    https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
-    Go to Generic       ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1    ${lib}
+    Set Test Variable      ${bingsignin}
+    ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
+    Go to Generic
+    ...             ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
+    ...             ${lib}
 
 Search One
     [Documentation]	Search one and a time
     [Arguments]     ${searchword}	${lib}
-    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'         Import Library		AppiumLibrary
-    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'      Import Library		Selenium2Library
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'
+    ...                 Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
+    ...                 Import Library		Selenium2Library
     Wait Until Page Contains Element    name=q
     Run Keyword If  '${lib}' == 'AppiumLibrary'         Clear Text                  name=q
     Run Keyword If  '${lib}' == 'Selenium2Library'      Clear Element Text          name=q
