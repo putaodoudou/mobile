@@ -20,7 +20,7 @@ Search Android Browser
     Set Library Search Order    AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=${PLATFORM_NAME}
     ...                 platformVersion=${PLATFORM_VERSION} app=${APP}
-    ...                 deviceName=${DEVICE_NAME}
+    ...                 deviceName=${DEVICE_NAME}S
 
     Search Test		AppiumLibrary
     :FOR      ${count}      in range    20
@@ -39,6 +39,7 @@ Search 20 iOS Browser
     :FOR      ${count}      in range    22
     \   Search One  ${count}	AppiumLibrary
     [TearDown]  Cleanup     AppiumLibrary
+
 
 Interactive
     [Documentation]     Run Bing
