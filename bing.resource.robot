@@ -104,7 +104,7 @@ Login
     Wait Until Page Contains Element		name=loginfmt
     Input text          name=loginfmt      ${login}
     Input text          name=passwd        ${password}
-    Click Element       name=SI
+    Submit Form
     Log Source
     # TODO handle it by selecting Text and Next. next pass with say I have a code
     ${status}=		Run Keyword If  '${lib}' == 'AppiumLibrary'
