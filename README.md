@@ -3,12 +3,18 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
 
   Download xcode 6.4 in below link:
     http://adcdownload.apple.com/Developer_Tools/Xcode_6.4/Xcode_6.4.dmg
+    
+    # copy below to install xcode
+    
     xcode-select --install  
     sudo xcodebuild -license
+  
   Download appium Version 1.4.8 (Draco)
     https://bitbucket.org/appium/appium.app/downloads/appium-1.4.8.dmg
     
   Install Android studio and Android simulator:
+    # copy below to terminal
+    
     sudo ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     sudo brew install Caskroom/cask/android-studio
 
