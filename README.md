@@ -70,3 +70,9 @@ Troubleshooting:
          remove loglevel=DEBUG
       3) open_browser() keywords must be strings
          remove arguments and install missing firefox if necessary
+
+Unit test:
+      0) Use java7 with older MacOSX by compiling https://blogs.oracle.com/arungupta/entry/build_open_jdk_7_on
+      1) launch with waxsim per instruction http://cocoamanifest.net/articles/2011/12/running-your-ios-app-in-the-simulator-from-the-command-line.html
+      2) if ipa built for all architecture http://stackoverflow.com/questions/517463/how-can-i-install-a-ipa-file-to-my-iphone-simulator
+      3) read https://github.com/sgleadow/xcodetest
