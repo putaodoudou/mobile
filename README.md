@@ -1,7 +1,7 @@
 # PC/mobile
 PC/Mobile robotframework support for iOS and Android testing. Install all below for MacOsX 10.10+
 
-  Download xcode 6.4 in below link:
+  Download xcode 6.4 in below link and install:
   
     http://adcdownload.apple.com/Developer_Tools/Xcode_6.4/Xcode_6.4.dmg
     
@@ -9,9 +9,10 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     xcode-select --install  
     sudo xcodebuild -license
   
-  Download appium Version 1.4.8 (Draco):
+  Download and install appium Version 1.4.8 (Draco):
   
     https://bitbucket.org/appium/appium.app/downloads/appium-1.4.8.dmg
+    pip install robotframework-appiumlibrary
     
   Install Android studio and Android simulator:
   
