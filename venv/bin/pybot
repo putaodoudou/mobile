@@ -1,4 +1,4 @@
-#!/Users/user/mobile/venv/bin/python2.7
+#!/Users/user/mobile/venv/bin/python2.7 -B
 
 import sys
 from robot import run_cli
