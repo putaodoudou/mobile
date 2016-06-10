@@ -16,7 +16,7 @@ ${to}               60
 # saved for android
 ${PLATFORM_NAME}        Android
 ${PLATFORM_VERSION}     4.4.2
-${DEVICE_NAME}          Android Emulator
+${ANDROID_NAME}         Android Emulator
 ${BING_VERIFY}          We've detected something unusual
 
 *** Keywords ***
