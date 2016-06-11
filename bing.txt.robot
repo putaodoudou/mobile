@@ -30,9 +30,7 @@ Search Android Browser
 Search 20 iOS Browser
     Import Library		AppiumLibrary
     Set Library Search Order    AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS
-    ...                 platformVersion=${pVersion}
-    ...                 deviceName=${device}	app=Safari
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS    app=Safari
     Wait Until Page Contains     Let's browse!
 
     Login   AppiumLibrary
@@ -50,11 +48,11 @@ Interactive
     ...                 app=/Applications/Appium.app/Contents/Resources/node_modules/appium/Bing.ipa
 
 Search iOS Browser
-    [Documentation]     Mobile web browser
+    [Documentation]     Mobile web browser.  Appium 1.5.3 required matching string which requires
+    ...                 not addition to deviceName ...
     [Tags]    Mobile
     Import Library		AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS
-    ...                 platformVersion=${pVersion} deviceName=${device}	app=Safari
+    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS    app=Safari
     Set Library Search Order    AppiumLibrary
     Wait Until Page Contains    Let's browse!
 
