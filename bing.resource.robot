@@ -41,17 +41,23 @@ Search Many
     ...                 Import Library		AppiumLibrary
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
     ...                 Import Library		Selenium2Library
+
+    Set Test Variable      ${bingsignin}
+    ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
+    Go to Generic
+    ...             ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
+    ...             ${lib}
     :FOR      ${count}      in range    ${total}
-    \   Wait Until Page Contains Element    name=q
+    \   Log Source
+    \   Wait Until Page Contains Element    id=sb_form_q
     \   Run Keyword If  '${lib}' == 'AppiumLibrary'         Run Keyword And Ignore Error
-    ...     Clear Text          name=q
+    ...     Clear Text  id=sb_form_q
     \   Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error
-    ...     Clear Element Text          name=q
-    \   ${random}   Generate Random String  ${count}   [NUMBERS]!@#$%^&*()
-    \   Wait Until Page Contains Element    name=q
-    \   Run Keyword And Ignore Error	Input text          name=q     ${random}\n
+    ...     Clear Element Text          id=sb_form_q
+    \   ${random}   Generate Random String  5   [NUMBERS]!@#$%^&*()
+    \   Wait Until Page Contains Element    id=sb_form_q
+    \   Run Keyword And Ignore Error	Input text          id=sb_form_q     ${random}\n
     \   Log	${random}
-    \   Wait Until Page Contains Element    name=go
     \   Log Many	${to}	${count}
     \   Wait Until Page Contains     Feedback
     #FIXME for debugging \   Builtin.Sleep	5
@@ -83,7 +89,7 @@ Verify Code
     #Input text		name=iOttText     ${code}
     #Submit Form
 
-Login
+Login Init
     [Documentation]	Login to bing with credentials
     [Arguments]     ${lib}
     ${status}=
@@ -100,6 +106,9 @@ Login
     Go to Generic
     ...             ${bingsignin}${ref}&src=EXPLICIT&sig=436FFF70C696439D84D126C03DE514D0    ${lib}
     Set Log Level	DEBUG
+
+Login PC
+    [Documentation]	Login to bing with credentials only for PC
     Log Source
     Wait Until Page Contains Element		name=loginfmt
     Input text          name=loginfmt      ${login}
@@ -107,10 +116,7 @@ Login
     Submit Form
     Log Source
     # TODO handle it by selecting Text and Next. next pass with say I have a code
-    ${status}=		Run Keyword If  '${lib}' == 'AppiumLibrary'
-    ...         Run Keyword And Ignore Error	Page Should Not Contain Text	${BING_VERIFY}
-    ${status}=		Run Keyword If  '${lib}' == 'Selenium2Library'
-    ...         Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
+    ${status}=		Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
     Run Keyword If  '${status[0]}' == 'PASS'
     ...             Run Keywords    Log Many        ${status[0]}    ${status[1]}    ${status}
     ...             AND             Verify Email        2501390707
@@ -118,11 +124,19 @@ Login
     Run Keyword If 	${status} == 'None'	Choose Ok On Next Confirmation
     ...		    ELSE    Wait Until Page Contains    Bing Rewards
 
+Login iOS
+    [Documentation]	Login to bing with credentials only for iOS
+    Log Source
+    Wait Until Page Contains Element		id=i0116
+    Input text          id=i0116        ${login}
+    Input text          id=i0118        ${password}
+    Click Element       id=idSIButton9
+    builtin.sleep       5
     Set Test Variable      ${bingsignin}
     ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
     Go to Generic
     ...             ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
-    ...             ${lib}
+    ...             AppiumLibrary
 
 Search One
     [Documentation]	Search one and a time
@@ -131,11 +145,39 @@ Search One
     ...                 Import Library		AppiumLibrary
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
     ...                 Import Library		Selenium2Library
-    Wait Until Page Contains Element    name=q
-    Run Keyword If  '${lib}' == 'AppiumLibrary'         Clear Text                  name=q
-    Run Keyword If  '${lib}' == 'Selenium2Library'      Clear Element Text          name=q
-    Keyword And Ignore Error    Wait Until Page Contains Element    name=q
-    Run Keyword And Ignore Error    Input text          name=q     ${searchword}
-    Wait Until Page Contains Element    name=go
-    Run Keyword And Ignore Error    Click Element       name=go
+
+    Set Test Variable      ${bingsignin}
+    ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
+    Go to Generic
+    ...             ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
+    ...             ${lib}
+    Log Source
+    Wait Until Page Contains Element    id=sb_form_q
+    Run Keyword If  '${lib}' == 'AppiumLibrary'         Clear Text                  id=sb_form_q
+    Run Keyword If  '${lib}' == 'Selenium2Library'      Clear Element Text          id=sb_form_q
+    Keyword And Ignore Error    Wait Until Page Contains Element    id=sb_form_q
+    Run Keyword And Ignore Error    Input text          id=sb_form_q     ${searchword}
+    Run Keyword And Ignore Error    Click Element       id=sb_form_go
     Wait Until Page Contains     Feedback
+
+Fullfill Daily Activities
+    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 credit
+    [Arguments]     ${url}
+    Import Library	Selenium2Library
+    #Open Browser    ${url}  ${BROWSER}
+    Go to Generic   ${url}      Selenium2Library
+    Log Source
+    ${status}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1 credit
+    Log     ${status}
+    Run Keyword If  '${status[0]}' == 'PASS'
+    ...     Click Element   partial link=0 of 1 credit
+
+Fullfill Many
+    [Documentation]	Fullfill multiple entries, caller is expected to call tear down
+    [Arguments]     ${total}    ${lib}  ${url}
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'
+    ...                 Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
+    ...                 Import Library		Selenium2Library
+    :FOR      ${count}      in range    ${total}
+    \   Fullfill Daily Activities   ${url}

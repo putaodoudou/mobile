@@ -70,8 +70,12 @@ Troubleshooting:
          remove loglevel=DEBUG
       3) open_browser() keywords must be strings
          remove arguments and install missing firefox if necessary
+         
+    El Capt 10.11+ can have below error:
+      1) restrictive mode in /System/Library/Frameworks/Python.framework/ , user that wants to replace system python library    will need to run virtualenv
 
 Unit test:
+
       0) Use java7 with older MacOSX by compiling https://blogs.oracle.com/arungupta/entry/build_open_jdk_7_on
       1) launch with waxsim per instruction http://cocoamanifest.net/articles/2011/12/running-your-ios-app-in-the-simulator-from-the-command-line.html
       2) if ipa built for all architecture http://stackoverflow.com/questions/517463/how-can-i-install-a-ipa-file-to-my-iphone-simulator
