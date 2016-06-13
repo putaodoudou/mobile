@@ -33,7 +33,7 @@ Search 20 iOS Browser
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS    app=Safari
     Wait Until Page Contains     Let's browse!
 
-    Login Init      AppiumLibrary
+    Login Init  AppiumLibrary
     Login iOS
     :FOR      ${count}      in range    22
     \   Search One  ${count}	AppiumLibrary
@@ -56,13 +56,13 @@ Search iOS Browser
     Set Library Search Order    AppiumLibrary
     Wait Until Page Contains    Let's browse!
 
-    Login Init      AppiumLibrary
+    Login Init  AppiumLibrary
     Login iOS
     Search Many     30      AppiumLibrary
     [TearDown]  Cleanup     AppiumLibrary
 
 Search PC Browser
-    [Documentation]     A test to open browser and close
+    [Documentation]     Search PC browsers 15 times with random strings
     [Tags]  PC
     Import Library	Selenium2Library
     Set Test Variable   ${capabilities}    ${NONE}
@@ -73,4 +73,19 @@ Search PC Browser
     Login Init  Selenium2Library
     Login PC
     Search Many     32      Selenium2Library
+    [TearDown]  Cleanup     Selenium2Library
+
+Self Test
+    Fullfill Daily Activities       file:///Users/user/Documents/onedrive/mobile-appium1.5.3/start.html
+
+Fullfill All
+    [Documentation]     FullFill All reward on PC
+    Import Library	Selenium2Library
+    Set Test Variable   ${capabilities}    ${NONE}
+    Set Test Variable   ${desired_capabilities}		${DC}
+    Set Test Variable   ${remote_url}			${NONE}
+    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}
+    Login Init      Selenium2Library
+    Login PC
+    Fullfill Many   10   Selenium2Library    https://bing.com/rewards/dashboard
     [TearDown]  Cleanup     Selenium2Library

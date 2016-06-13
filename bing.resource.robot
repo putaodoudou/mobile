@@ -41,6 +41,12 @@ Search Many
     ...                 Import Library		AppiumLibrary
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
     ...                 Import Library		Selenium2Library
+
+    Set Test Variable      ${bingsignin}
+    ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
+    Go to Generic
+    ...             ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
+    ...             ${lib}
     :FOR      ${count}      in range    ${total}
     \   Log Source
     \   Wait Until Page Contains Element    id=sb_form_q
@@ -118,12 +124,6 @@ Login PC
     Run Keyword If 	${status} == 'None'	Choose Ok On Next Confirmation
     ...		    ELSE    Wait Until Page Contains    Bing Rewards
 
-    Set Test Variable      ${bingsignin}
-    ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
-    Go to Generic
-    ...             ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
-    ...             Selenium2Library
-
 Login iOS
     [Documentation]	Login to bing with credentials only for iOS
     Log Source
@@ -145,6 +145,12 @@ Search One
     ...                 Import Library		AppiumLibrary
     ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
     ...                 Import Library		Selenium2Library
+
+    Set Test Variable      ${bingsignin}
+    ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
+    Go to Generic
+    ...             ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
+    ...             ${lib}
     Log Source
     Wait Until Page Contains Element    id=sb_form_q
     Run Keyword If  '${lib}' == 'AppiumLibrary'         Clear Text                  id=sb_form_q
@@ -153,3 +159,25 @@ Search One
     Run Keyword And Ignore Error    Input text          id=sb_form_q     ${searchword}
     Run Keyword And Ignore Error    Click Element       id=sb_form_go
     Wait Until Page Contains     Feedback
+
+Fullfill Daily Activities
+    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 credit
+    [Arguments]     ${url}
+    Import Library	Selenium2Library
+    #Open Browser    ${url}  ${BROWSER}
+    Go to Generic   ${url}      Selenium2Library
+    Log Source
+    ${status}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1 credit
+    Log     ${status}
+    Run Keyword If  '${status[0]}' == 'PASS'
+    ...     Click Element   partial link=0 of 1 credit
+
+Fullfill Many
+    [Documentation]	Fullfill multiple entries, caller is expected to call tear down
+    [Arguments]     ${total}    ${lib}  ${url}
+    ${status}=      Run Keyword If  '${lib}' == 'AppiumLibrary'
+    ...                 Import Library		AppiumLibrary
+    ${status}=      Run Keyword If  '${lib}' == 'Selenium2Library'
+    ...                 Import Library		Selenium2Library
+    :FOR      ${count}      in range    ${total}
+    \   Fullfill Daily Activities   ${url}
