@@ -31,7 +31,7 @@ Go to Generic
 Cleanup
     [Documentation]	Run only one when one fails with the right API calls from Appium or PC browser
     [Arguments]     ${lib}
-    ${status}=      Run Keyword If    '${lib}' == 'Selenium2Library'    Close Browser
+    ${status}=      Run Keyword If    '${lib}' == 'Selenium2Library'    Close All Browsers
     ${status}=      Run Keyword If    '${lib}' == 'AppiumLibrary'       Close Application
 
 Search Many
