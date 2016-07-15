@@ -50,7 +50,7 @@ Interactive
 Search iOS Browser
     [Documentation]     Mobile web browser.  Appium 1.5.3 required matching string which requires
     ...                 not addition to deviceName ...
-    [Tags]    Mobile
+    [Tags]    Mobile    NONBLOCK
     Import Library		AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS    app=Safari
     Set Library Search Order    AppiumLibrary
@@ -63,7 +63,7 @@ Search iOS Browser
 
 Search PC Browser
     [Documentation]     Search PC browsers 15 times with random strings
-    [Tags]  PC
+    [Tags]  PC      NONBLOCK
     Import Library	Selenium2Library
     Set Test Variable   ${capabilities}    ${NONE}
     Set Test Variable   ${desired_capabilities}		${DC}
@@ -80,6 +80,7 @@ Self Test
 
 Fullfill All
     [Documentation]     FullFill All reward on PC
+    [Tags]      NONBLOCK
     Import Library	Selenium2Library
     Set Test Variable   ${capabilities}    ${NONE}
     Set Test Variable   ${desired_capabilities}		${DC}
