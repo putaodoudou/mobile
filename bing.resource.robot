@@ -31,7 +31,7 @@ Go to Generic
 Cleanup
     [Documentation]	Run only one when one fails with the right API calls from Appium or PC browser
     [Arguments]     ${lib}
-    ${status}=      Run Keyword If    '${lib}' == 'Selenium2Library'    Close Browser
+    ${status}=      Run Keyword If    '${lib}' == 'Selenium2Library'    Close All Browsers
     ${status}=      Run Keyword If    '${lib}' == 'AppiumLibrary'       Close Application
 
 Search Many
@@ -127,7 +127,7 @@ Login PC
 Login iOS
     [Documentation]	Login to bing with credentials only for iOS
     Log Source
-    Wait Until Page Contains Element		id=i0116
+    Wait Until Page Contains Element		id=i0116    timeout=${to}
     Input text          id=i0116        ${login}
     Input text          id=i0118        ${password}
     Click Element       id=idSIButton9
