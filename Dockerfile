@@ -10,9 +10,9 @@ WORKDIR	/data
 
 ADD bing.txt.robot /data/
 ADD bing.resource.robot /data/
-COPY bashrc /data/.bashrc
+#COPY bashrc /data/.bashrc
 
-RUN /bin/bash -c 'source .bashrc ; env'
+#RUN /bin/bash -c 'source .bashrc ; env'
 RUN pip install --upgrade pip
 RUN pip install robotframework-appiumlibrary
 
