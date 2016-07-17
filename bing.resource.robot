@@ -167,10 +167,20 @@ Fullfill Daily Activities
     #Open Browser    ${url}  ${BROWSER}
     Go to Generic   ${url}      Selenium2Library
     Log Source
-    ${status}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1 credit
-    Log     ${status}
-    Run Keyword If  '${status[0]}' == 'PASS'
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1 credit
+    Log     ${creditstatus}
+    Log Source
+    Run Keyword If  '${creditstatus[0]}' == 'PASS'
     ...     Click Element   partial link=0 of 1 credit
+
+    # Handle case if new account and there needs to go through welcome
+    ${status}=        Run Keyword And Ignore Error	Page Should Contain
+    ...                     Find out how you can get the most out of Bing Rewards.
+    Log     ${status}
+    Run Keyword If  '${status[0]}' == 'PASS' and '${creditstatus[0]}' == 'PASS'
+    ...     Run Keywords    Repeat Keyword    4     Click Element   partial link=Next
+    ...     AND             Click Element   partial link=Finish
+    Log Source
 
 Fullfill Many
     [Documentation]	Fullfill multiple entries, caller is expected to call tear down
