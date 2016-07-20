@@ -115,6 +115,7 @@ Login PC
     Input text          name=passwd        ${password}
     Submit Form
     Log Source
+    Suspended
     # TODO handle it by selecting Text and Next. next pass with say I have a code
     ${status}=		Run Keyword And Ignore Error	Page Should Contain	${BING_VERIFY}
     Run Keyword If  '${status[0]}' == 'PASS'
@@ -173,6 +174,18 @@ Fullfill Daily Activities
     Run Keyword If  '${creditstatus[0]}' == 'PASS'
     ...     Click Element   partial link=0 of 1 credit
 
+Quiz
+    [Documentation]     Welcome tutorial requires clicking next
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 3 credit
+    Log     ${creditstatus}
+    Log Source
+    Run Keyword If  '${creditstatus[0]}' == 'PASS'
+    ...     Run keywords        Click Element   partial link=0 of 3 credits
+    ...     AND                 Click Element   partial link=Start playing!
+    Log Source
+
+Welcome Tutorial
+    [Documentation]     Welcome tutorial requires clicking next
     # Handle case if new account and there needs to go through welcome
     ${status}=        Run Keyword And Ignore Error	Page Should Contain
     ...                     Find out how you can get the most out of Bing Rewards.
@@ -180,6 +193,29 @@ Fullfill Daily Activities
     Run Keyword If  '${status[0]}' == 'PASS' and '${creditstatus[0]}' == 'PASS'
     ...     Run Keywords    Repeat Keyword    4     Click Element   partial link=Next
     ...     AND             Click Element   partial link=Finish
+    Log Source
+
+Edge support
+    [Documentation]    Edge requires clicking next
+    ${status}=        Run Keyword And Ignore Error	Page Should Contain
+    ...                     Earn 1 credit
+    Log     ${status}
+    Run Keyword If  '${status[0]}' == 'PASS'
+    ...     Click Element   partial link=Earn 1 credit
+    Log Source
+
+Suspended
+    ${status}=        Run Keyword And Ignore Error	Page Should Contain
+    ...                     We'll send a verification code to your phone.  After you enter the code, you can sign in.
+    Log     ${status}
+    Run Keyword If  '${status[0]}' == 'PASS'
+    ...     Submit Form
+
+    ${status}=        Run Keyword And Ignore Error	Page Should Contain
+    ...                     Enter your phone number, and we'll send you a security code
+    Log     ${status}
+    Run Keyword If  '${status[0]}' == 'PASS'
+    ...     Submit Form
     Log Source
 
 Fullfill Many
