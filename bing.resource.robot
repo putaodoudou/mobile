@@ -173,6 +173,18 @@ Fullfill Daily Activities
     Run Keyword If  '${creditstatus[0]}' == 'PASS'
     ...     Click Element   partial link=0 of 1 credit
 
+Quiz
+    [Documentation]     Welcome tutorial requires clicking next
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 3 credit
+    Log     ${creditstatus}
+    Log Source
+    Run Keyword If  '${creditstatus[0]}' == 'PASS'
+    ...     Run keywords        Click Element   partial link=0 of 3 credit
+    ...     AND                 Click Element   partial link=Start playing!
+    Log Source
+
+Welcome Tutorial
+    [Documentation]     Welcome tutorial requires clicking next
     # Handle case if new account and there needs to go through welcome
     ${status}=        Run Keyword And Ignore Error	Page Should Contain
     ...                     Find out how you can get the most out of Bing Rewards.
