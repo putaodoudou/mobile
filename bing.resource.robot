@@ -172,7 +172,8 @@ Fullfill Daily Activities
     Log     ${creditstatus}
     Log Source
     Run Keyword If  '${creditstatus[0]}' == 'PASS'
-    ...     Click Element   partial link=0 of 1 credit
+    ...     Run Keywords    Click Element   partial link=0 of 1 credit
+    ...     AND             Close Browser
 
 Quiz
     [Documentation]     Welcome tutorial requires clicking next
