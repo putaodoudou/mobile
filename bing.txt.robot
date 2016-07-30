@@ -7,7 +7,7 @@ Documentation     An acceptance test suite to verify bing features.
 Resource          bing.resource.robot
 
 *** Variables ***
-${DC}                   {"browserName:firefox,version:41"}
+${DC}                   {"browserName:firefox,version:41,media.volume_scale:0.0"}
 ${login}                ${NONE}
 ${password}             ${NONE}
 ${device}		iPhone 6 Plus
@@ -20,7 +20,7 @@ Search Android Browser
     Set Library Search Order    AppiumLibrary
     Open Application	http://localhost:4723/wd/hub	alias=web	platformName=${PLATFORM_NAME}
     ...                 platformVersion=${PLATFORM_VERSION} app=${APP}
-    ...                 deviceName=${DEVICE_NAME}S
+    ...                 deviceName=${DEVICE_NAME}
 
     Search Test		AppiumLibrary
     :FOR      ${count}      in range    20
@@ -66,9 +66,8 @@ Search PC Browser
     [Tags]  PC      NONBLOCK
     Import Library	Selenium2Library
     Set Test Variable   ${capabilities}    ${NONE}
-    Set Test Variable   ${desired_capabilities}		${DC}
     Set Test Variable   ${remote_url}			${NONE}
-    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}
+    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}    desired_capabilities=${DC}
     Set Library Search Order    Selenium2Library
     Login Init  Selenium2Library
     Login PC
@@ -76,16 +75,18 @@ Search PC Browser
     [TearDown]  Cleanup     Selenium2Library
 
 Self Test
-    Fullfill Daily Activities       file:///Users/user/Documents/onedrive/mobile-appium1.5.3/start.html
+    Import Library	Selenium2Library
+    Open Browser       file:///Users/user/Documents/onedrive/mobile-appium1.5.3/suspend.html
+    ...                 desired_capabilities=${DC}
+    Suspended
 
 Fullfill All
     [Documentation]     FullFill All reward on PC
     [Tags]      NONBLOCK
     Import Library	Selenium2Library
     Set Test Variable   ${capabilities}    ${NONE}
-    Set Test Variable   ${desired_capabilities}		${DC}
     Set Test Variable   ${remote_url}			${NONE}
-    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}
+    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}    desired_capabilities=${DC}
     Login Init      Selenium2Library
     Login PC
     Fullfill Many   10   Selenium2Library    https://bing.com/rewards/dashboard
