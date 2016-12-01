@@ -29,8 +29,11 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     # optional browser support
     pip install chromedriver_installer
     pip install requests
-    pip install pabot
+    pip install robotframework-pabot
     
+    # for edge and getting the latest code
+    pip install --upgrade git+https://github.com/robotframework/Selenium2Library@master
+  
     # mobile support (see https://github.com/kenneyhe/mobile.git)
     1) pip install robotframework-appiumlibrary
     2) download appium and install
@@ -52,8 +55,18 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     3f) put in /Users/khe/Library/Android/sdk in Appium's android advance setting
     3g) run RB test files
 
-  Cmdline:
-    iPhone:
+  Installing IE with grid for development:
+  
+    1) Download Virtual Machine with latest IE:
+    
+        https://blogs.msdn.microsoft.com/ie/2013/12/18/ie11-virtual-machines-now-available-on-modern-ie/
+        
+        https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
+              
+    2) Try below to setup Edge Selenium Grid on Windows 10:
+    http://www.giuseppecilia.com/2016/04/18/selenium-grid-on-microsoft-edge-browser/
+
+  Cmdlines for iOS:
 
     pybot -v BROWSER:firefox -v login:<secret> -v DC:"browserName:firefox,version:41" -v password:<secret> -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
     pabot -v BROWSER:firefox -v login:<secret> -v DC:"browserName:firefox,version:41" -v password:<secret> -v device:"iPhone 6" -v pVersion:8.4 -t "Search iOS Browser" bing.txt.robot  
@@ -73,6 +86,9 @@ Troubleshooting:
          
     El Capt 10.11+ can have below error:
       1) restrictive mode in /System/Library/Frameworks/Python.framework/ , user that wants to replace system python library    will need to run virtualenv
+    
+    Use below to help install patches from github:
+      1) http://stackoverflow.com/questions/20101834/pip-install-from-github-repo-branch
 
 Unit test:
 
