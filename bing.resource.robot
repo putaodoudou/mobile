@@ -49,7 +49,7 @@ Search Many
     ...             ${lib}
     :FOR      ${count}      in range    ${total}
     \   Log Source
-    \   Wait Until Page Contains Element    id=sb_form_q
+    \   Wait Until Page Contains Element    id=sb_form_q    timeout=${to}
     \   Run Keyword If  '${lib}' == 'AppiumLibrary'         Run Keyword And Ignore Error
     ...     Clear Text  id=sb_form_q
     \   Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error
@@ -59,7 +59,7 @@ Search Many
     \   Run Keyword And Ignore Error	Input text          id=sb_form_q     ${random}\n
     \   Log	${random}
     \   Log Many	${to}	${count}
-    \   Wait Until Page Contains     Feedback
+    \   Wait Until Page Contains     Feedback   timeout=${to}
     #FIXME for debugging \   Builtin.Sleep	5
     Go to Generic   ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
     ...             ${lib}
@@ -112,7 +112,11 @@ Login PC
     Log Source
     Wait Until Page Contains Element		name=loginfmt
     Input text          name=loginfmt      ${login}
+    Click Element       id=idSIButton9
+    Builtin.Sleep       1
     Input text          name=passwd        ${password}
+    Builtin.Sleep       1
+
     Submit Form
     Log Source
     Suspended
@@ -125,11 +129,13 @@ Login PC
     Run Keyword If 	${status} == 'None'	Choose Ok On Next Confirmation
     ...		    ELSE    Wait Until Page Contains    Bing Rewards
 
-Login iOS
+Login mobile
     [Documentation]	Login to bing with credentials only for iOS
     Log Source
     Wait Until Page Contains Element		id=i0116    timeout=${to}
     Input text          id=i0116        ${login}
+    Click Element  id=idSIButton9
+
     Input text          id=i0118        ${password}
     Click Element       id=idSIButton9
     builtin.sleep       5
@@ -159,26 +165,39 @@ Search One
     Keyword And Ignore Error    Wait Until Page Contains Element    id=sb_form_q
     Run Keyword And Ignore Error    Input text          id=sb_form_q     ${searchword}
     Run Keyword And Ignore Error    Click Element       id=sb_form_go
-    Wait Until Page Contains     Feedback
+    Wait Until Page Contains     Feedback   timeout=${to}
 
-Fullfill Daily Activities
-    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 credit
+Fullfill Daily Activities Legacy
+    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 credit
     [Arguments]     ${url}
     Import Library	Selenium2Library
     #Open Browser    ${url}  ${BROWSER}
     Go to Generic   ${url}      Selenium2Library
     Log Source
-    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1 credit
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1[0] credit
     Log     ${creditstatus}
     Log Source
     Run Keyword If  '${creditstatus[0]}' == 'PASS'
-    ...     Run Keywords    Click Element   partial link=0 of 1 credit
-    ...     AND             Close Window
+    ...     Run Keywords    Click Element   partial link=0 of 1[0] credit
+    ...     AND             Log Source
+
+Fullfill Daily Activities
+    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 credit
+    [Arguments]     ${url}
+    Import Library	Selenium2Library
+    #Open Browser    ${url}  ${BROWSER}
+    Go to Generic   ${url}      Selenium2Library
+    Log Source
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    POINTS
+    Log     ${creditstatus}
+    Log Source
+    Run Keyword If  '${creditstatus[0]}' == 'PASS'
+    ...     Run Keywords    Click Element   partial link=POINTS
     ...     AND             Log Source
 
 Quiz
     [Documentation]     Welcome tutorial requires clicking next
-    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 3 credit
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 3[0] credit
     Log     ${creditstatus}
     Log Source
     Run Keyword If  '${creditstatus[0]}' == 'PASS'
@@ -200,15 +219,22 @@ Welcome Tutorial
 Edge support
     [Documentation]    Edge requires clicking next
     ${status}=        Run Keyword And Ignore Error	Page Should Contain
-    ...                     Earn 1 credit
+    ...                     Earn 1[0] credit
     Log     ${status}
     Run Keyword If  '${status[0]}' == 'PASS'
-    ...     Click Element   partial link=Earn 1 credit
+    ...     Click Element   partial link=Earn 1[0] credit
+    Log Source
+
+    ${status}=        Run Keyword And Ignore Error	Page Should Contain
+    ...                     1[0] point
+    Log     ${status}
+    Run Keyword If  '${status[0]}' == 'PASS'
+    ...     Click Element   partial link=1 point
     Log Source
 
 Suspended
     ${status}=        Run Keyword And Ignore Error	Page Should Contain
-    ...                     We'll send a verification code to your phone.  After you enter the code, you can sign in.
+    ...  We'll send a verification code to your phone.  After you enter the code, you can sign in.
     Log     ${status}
     Run Keyword If  '${status[0]}' == 'PASS'
     ...     Submit Form
@@ -229,3 +255,69 @@ Fullfill Many
     ...                 Import Library		Selenium2Library
     :FOR      ${count}      in range    ${total}
     \   Fullfill Daily Activities   ${url}
+
+Login swagbucks
+    [Documentation]	Login swagbucks
+    Wait Until Page Contains Element    name=emailAddress    timeout=${to}
+    Input Text      name=emailAddress   ${login}
+    Wait Until Page Contains Element    name=password    timeout=${to}
+    Input Text      name=password       ${password}
+    Submit Form
+    ${status}=  Run Keyword And Ignore Error        Click Element       id=goldSurveyModalExit
+    #Wait Until Page Contains       SWAG CODE   timeout=${to}
+
+
+S Homepage
+    [Documentation]	Open side bar in homepage
+
+    Set Test Variable   ${url}  http://www.swagbucks.com/Swagbucks
+    Go to Generic       ${url}  Selenium2Library
+
+    ${status}=  Run Keyword And Ignore Error        Select Window       id=html
+    ${status}=  Run Keyword And Ignore Error        Click Element       id=swagButtonModalExit
+
+    Wait Until Element Is Visible       link=Search   timeout=10
+    Run Keyword And Ignore Error        Click Button    sbMainNavToggle
+
+S Poll
+    [Documentation]	Click on 3rd item of swagbucks
+    Set Test Variable   ${url}  http://www.swagbucks.com/polls
+    Go to Generic       ${url}  Selenium2Library
+    Wait Until Page Contains   Poll        timeout=${to}
+    Run Keyword And Ignore Error        Click Element
+    ...                                 xpath=//tr[3]/td/table/tbody/tr/td[2]/table/tbody/tr/td
+    Run Keyword And Ignore Error        Click Element   id=btnVote
+
+Detect Crave
+    #Wait Until Element Is Visible   css=#link_down    timeout=60
+    ${status}=    Run Keyword And Ignore Error   Wait Until Page Contains    00:00   timeout=60
+    Run Keyword If  '${status[0]}' != 'PASS'    # TODO Not for me if 2 or 3 needed
+    ...     Return From Keyword    ${-1}
+    builtin.sleep   40
+
+Continue Crave
+    S Homepage
+
+S Crave
+    [Documentation]	Click on swagbucks crave
+    Set Test Variable   ${url}      http://www.swagbucks.com/watch/daily-crave
+    Go to Generic       ${url}      Selenium2Library
+    Wait Until Page Contains   Discovering        timeout=${to}
+    Detect Crave
+    Click Element   css=#link_down
+    Detect Crave
+    ${status}=    Run Keyword And Ignore Error   Click Element   css=#link_down
+    # TODO Not for me if 2 or 3 needed
+    Run Keyword If  '${status[0]}' != 'PASS'
+    ...     Return From Keyword    ${-1}
+
+    # TODO Not for me if 2 or 3 needed
+    ${status}=    Run Keyword And Ignore Error    Detect Crave
+    Run Keyword If  '${status[0]}' != 'PASS'
+    ...     Return From Keyword    ${-1}
+    Wait Until Page Contains    Activity Completed!
+
+S Search
+    [Documentation]	Click swagbucks search
+    Wait Until Page Contains            Daily Search        timeout=${to}
+    Run Keyword And Ignore Error        Click Element   partial link=Daily Search
