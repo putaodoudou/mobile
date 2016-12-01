@@ -7,9 +7,10 @@ Documentation     An acceptance test suite to verify bing features.
 Resource          bing.resource.robot
 
 *** Variables ***
-${DC}                   {"browserName:firefox,version:41,media.volume_scale:0.0"}
-${login}                ${NONE}
-${password}             ${NONE}
+${PORT}         4723
+${DC}           {"browserName:firefox,version:41,media.volume_scale:0.0"}
+${login}        ${NONE}
+${password}     ${NONE}
 ${device}		iPhone 6 Plus
 ${pVersion}		8.4
 
@@ -18,7 +19,7 @@ ${pVersion}		8.4
 Search Android Browser
     Import Library		AppiumLibrary
     Set Library Search Order    AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=Android
+    Open Application	${REMOTE_URL}	alias=web	platformName=Android
     ...                 platformVersion=${PLATFORM_VERSION}
     ...                 browserName=browser
     ...                 deviceName=${DEVICE_NAME}
@@ -32,7 +33,7 @@ Search Android Browser
 Search 20 iOS Browser
     Import Library		AppiumLibrary
     Set Library Search Order    AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS    app=Safari
+    Open Application	${REMOTE_URL} 	alias=web	platformName=iOS    app=Safari
     Wait Until Page Contains     Let's browse!
 
     Login Init  AppiumLibrary
@@ -44,7 +45,7 @@ Search 20 iOS Browser
 Interactive
     [Documentation]     Run Bing
     [Tags]    Bing
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS
+    Open Application	${REMOTE_URL} 	alias=web	platformName=iOS
     ...                 platformVersion=${pVersion}
     ...                 deviceName=${device}
     ...                 app=/Applications/Appium.app/Contents/Resources/node_modules/appium/Bing.ipa
@@ -54,7 +55,7 @@ Search iOS Browser
     ...                 not addition to deviceName ...
     [Tags]    Mobile    NONBLOCK
     Import Library		AppiumLibrary
-    Open Application	http://localhost:4723/wd/hub	alias=web	platformName=iOS    app=Safari
+    Open Application	${REMOTE_URL} 	alias=web	platformName=iOS    app=Safari
     Set Library Search Order    AppiumLibrary
     Wait Until Page Contains    Let's browse!
 

@@ -9,7 +9,7 @@ Documentation     A resource file with reusable keywords and variables.
 Library         String
 
 *** Variables ***
-${REMOTE_URL}       http://localhost:4723/wd/hub
+${REMOTE_URL}       http://localhost:${PORT}/wd/hub
 ${APP}              Chrome
 ${to}               60
 
