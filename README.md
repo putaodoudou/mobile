@@ -30,23 +30,30 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     pip install chromedriver_installer
     pip install requests
     pip install robotframework-pabot
-    
+
+
     # for edge and getting the latest code
     pip install --upgrade git+https://github.com/robotframework/Selenium2Library@master
   
-    # mobile support (see https://github.com/kenneyhe/mobile.git)
+  Mobile support:
+
+    (see https://github.com/kenneyhe/mobile.git)
     1) pip install robotframework-appiumlibrary
     2) download appium and install
-    
-    # iOS
+
+    _# iOS_
     3a) download xcode from apps library, xcode->preference->download iOS 8.4
     4a) download and install above and iOS simulator ie: 8.4 from xcode xscreen
     5a) In Appium->iOS settings->advanced setting->click:
         ~/Applications/Xcode application
     6a) chmod -R uog+w /Library/Developer/CoreSimulator
     7a) launch and run RB test files
-    
-    # or Android
+    8a) cd /Applications/Xcode.app/Contents/Developer/Applications
+    9a) if manually starting iOS simulator
+        open -n iOS\ Simulator.app
+
+
+    _# Android_
     3a) download android SDK
     3b) install version matching appium ie: 4.4
     3c) tools->android->AVD Manager (enable ADB), add 4.4 Nexus or other phone
@@ -96,3 +103,15 @@ Unit test:
       1) launch with waxsim per instruction http://cocoamanifest.net/articles/2011/12/running-your-ios-app-in-the-simulator-from-the-command-line.html
       2) if ipa built for all architecture http://stackoverflow.com/questions/517463/how-can-i-install-a-ipa-file-to-my-iphone-simulator
       3) read https://github.com/sgleadow/xcodetest
+
+Functional test:
+
+      0) Run and pass external tool test for all accounts with iOS, PC and Android
+         All tests are available after loading setting.jar (in private image)
+             a) Tools->External Tools -> ...
+
+
+Release Build test:
+
+      0) Upon checkin, check below to make sure no issues in docker hub release tests
+         https://hub.docker.com/r/kenney/mobile/builds/
