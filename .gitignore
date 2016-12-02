@@ -7,3 +7,5 @@
 venv
 *xml
 *iml
+.DS_Store
+venv3/
