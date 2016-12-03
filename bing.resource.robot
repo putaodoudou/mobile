@@ -34,6 +34,9 @@ Cleanup
     ${status}=      Run Keyword If    '${lib}' == 'Selenium2Library'    Close All Browsers
     ${status}=      Run Keyword If    '${lib}' == 'AppiumLibrary'       Close Application
 
+Run Diag
+    Run Keywords    Capture Page Screenshot      AND         Log Source
+
 Search Many
     [Documentation]	Search multiple entries, caller is expected to call tear down
     [Arguments]     ${total}    ${lib}
@@ -166,6 +169,44 @@ Search One
     Run Keyword And Ignore Error    Input text          id=sb_form_q     ${searchword}
     Run Keyword And Ignore Error    Click Element       id=sb_form_go
     Wait Until Page Contains     Feedback   timeout=${to}
+
+Search iOS Browser Port
+    [Documentation]     Mobile web browser.  Appium 1.5.3 required matching string which requires
+    ...                 not addition to deviceName ...
+    [Tags]    Mobile    NONBLOCK
+    Import Library		AppiumLibrary       run_on_failure=Run Diag
+    ${status}=      Run Keyword And Ignore Error
+    ...                 Open Application	${REMOTE_URL} 	alias=web	platformName=iOS    app=Safari
+    Run Keyword If  '${status[0]}' != 'PASS'
+    ...     Return From Keyword    ${-1}
+    Set Library Search Order    AppiumLibrary
+    Wait Until Page Contains    Let's browse!
+
+    ${status}=      Run Keyword And Ignore Error
+    ...                 Login Init  AppiumLibrary
+    Run Keyword If  '${status[0]}' != 'PASS'
+    ...     Return From Keyword    ${-1}
+
+    ${status}=      Run Keyword And Ignore Error
+    ...     Login mobile
+    Run Keyword If  '${status[0]}' != 'PASS'
+    ...     Return From Keyword    ${-1}
+
+
+    ${status}=      Run Keyword And Ignore Error
+    ...                 Search Many     30      AppiumLibrary
+    Run Keyword If  '${status[0]}' != 'PASS'
+    ...     Return From Keyword    ${-1}
+    [TearDown]  Cleanup     AppiumLibrary
+
+Repeat Multiple iOS Connections
+    Set Test Variable   ${PORT}         4724
+    Set Test Variable   ${REMOTE_URL}       http://localhost:${PORT}/wd/hub
+
+    ${status}=      Run Keyword And Ignore Error        Search iOS Browser Port
+
+    Run Keyword If  '${status[0]}' != 'PASS'
+    ...     Search iOS Browser Port
 
 Fullfill Daily Activities Legacy
     [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 credit

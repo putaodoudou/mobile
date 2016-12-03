@@ -51,23 +51,17 @@ Interactive
     ...                 app=/Applications/Appium.app/Contents/Resources/node_modules/appium/Bing.ipa
 
 Search iOS Browser
-    [Documentation]     Mobile web browser.  Appium 1.5.3 required matching string which requires
-    ...                 not addition to deviceName ...
     [Tags]    Mobile    NONBLOCK
-    Import Library		AppiumLibrary
-    Open Application	${REMOTE_URL} 	alias=web	platformName=iOS    app=Safari
-    Set Library Search Order    AppiumLibrary
-    Wait Until Page Contains    Let's browse!
+    Search iOS Browser Port
 
-    Login Init  AppiumLibrary
-    Login mobile
-    Search Many     30      AppiumLibrary
-    [TearDown]  Cleanup     AppiumLibrary
+Repeat
+    [Tags]    Mobile
+    Repeat Multiple iOS Connections
 
 Search PC Browser
     [Documentation]     Search PC browsers 15 times with random strings
     [Tags]  PC      NONBLOCK
-    Import Library	Selenium2Library     run_on_failure=Log Source
+    Import Library	Selenium2Library     run_on_failure=Run Diag
     Set Test Variable   ${capabilities}    ${NONE}
     Set Test Variable   ${remote_url}			${NONE}
     Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}    desired_capabilities=${DC}
@@ -101,8 +95,7 @@ Fullfill All
 
 Swagbuck
     [Tags]    Mobile    NONBLOCK
-    Import Library	Selenium2Library
-    #run_on_failure=Log Source
+    Import Library	Selenium2Library    run_on_failure=Run Diag
     Set Test Variable   ${capabilities}    ${NONE}
     Set Test Variable   ${remote_url}			${NONE}
     Set Test Variable      ${url}
