@@ -1,0 +1,15 @@
+chrome-xvfb:
+  image: markadams/chromium-xvfb
+  autoredeploy: true
+
+appium-emulator:
+  image: rgonalo/appium-emulator
+  autoredeploy: true
+
+mobile:
+  image: kenney/mobile
+  autoredeploy: true
+
+configpackage:
+  image: heinvestmentsllc/private
+  autoredeploy: true
