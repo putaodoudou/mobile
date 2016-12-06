@@ -52,7 +52,6 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     9a) if manually starting iOS simulator
         open -n iOS\ Simulator.app
 
-
     _# Android_
     3a) download android SDK
     3b) install version matching appium ie: 4.4
@@ -115,3 +114,7 @@ Release Build test:
 
       0) Upon checkin, check below to make sure no issues in docker hub release tests
          https://hub.docker.com/r/kenney/mobile/builds/
+
+      1) for manually executing docker one must use this work around for symbolic links in docker-dir/
+         read https://github.com/docker/docker/issues/6094#issuecomment-54556720
+          tar -czh . | docker build -

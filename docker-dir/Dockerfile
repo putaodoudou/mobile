@@ -1,3 +1,4 @@
+# Dockerfile must be run with "tar -czh . | docker build -" to work around symbolic unsupported by docker build
 FROM kenney/robot-firefox:latest
 
 MAINTAINER Kenney He <kenneyhe@gmail.com>
@@ -11,6 +12,7 @@ ADD . /data
 WORKDIR	/data
 
 # Need to fix docker plugin to use pwd of base project
+
 ADD bing.txt.robot /data/
 ADD bing.resource.robot /data/
 ADD bashrc /data/.bashrc
