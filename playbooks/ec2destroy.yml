@@ -1,0 +1,19 @@
+---
+# delete all running old instances
+- name: terminate old instances
+  hosts: all
+  vars:
+    region: "us-west-2"
+    pem_name: "new.pem"
+  tags:
+    runningec2
+  tasks:
+    - action: ec2_facts
+    - name: terminating old instances
+      local_action:
+        module: ec2
+        state: 'absent'
+        region: "{{ region }}"
+        keypair: "{{ pem_name }}"
+        instance_ids: "{{ ansible_ec2_instance_id }}"
+        wait: true

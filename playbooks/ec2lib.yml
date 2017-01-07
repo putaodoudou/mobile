@@ -1,0 +1,79 @@
+---
+# User might need pem key from their ec2
+# ie: ansible-playbook main.yml -vv
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tags:
+    startup
+  tasks:
+
+  - name: Launch instance (Ubuntu 14.04 hvm)
+    ec2:
+         image: "{{ ami_name }}"
+         instance_type: "{{ instance_type }}"
+         keypair: "{{ pem_name }}"
+         instance_tags: '{"Environment":"myapp","Class":"myapp-immutable","Name":"myapp (immutable)"}'
+         region: '{{region}}'
+         aws_zone: '{{ region }}{{ aws_zone }}'
+         group: "{{ sec_group }}"
+         wait: true
+         assign_public_ip: yes
+         vpc_subnet_id: "{{ vpc_name }}"
+    register: ec2_info
+
+  - name: Add new instance
+    add_host:
+      hostname: "{{ item.public_ip }}"
+      groupname: "myapp,ec2hosts"
+    with_items: "{{ ec2_info.instances }}"
+    when: ec2_info.changed
+
+  - debug: var=ec2_info.instances
+
+  - name: Wait for instances to listen on port 22
+    wait_for:
+      state: started
+      host: "{{ item.public_dns_name }}"
+      port: 22
+    with_items: "{{ ec2_info.instances }}"
+    when: ec2_info.changed
+    notify: Destroy all current instances
+
+  handlers:
+    - action: ec2_facts
+    - name: Destroy all current instances
+      local_action:
+        module: ec2
+        state: 'absent'
+        region: "{{ region }}"
+        keypair: "{{ pem_name }}"
+        instance_ids: "{{ ansible_ec2_instance_id }}"
+        wait: true
+
+# Run your specific roles that install and configure your application
+- hosts: ec2hosts
+  gather_facts: true
+  user: ubuntu
+  sudo: yes
+  tags:
+    runningec2
+  roles:
+    - geerlingguy.memcached
+
+- hosts: ec2hosts
+  tasks:
+
+  - name: Gather ec2 facts
+    action: ec2_facts
+
+  - name: check if host can reach the google server
+    can_reach: host=www.google.com port=80 timeout=1
+
+  - name: Add newly created instance to elb
+    local_action:
+        module: ec2_elb
+        region: "{{ region }}"
+        instance_id: "{{ ansible_ec2_instance_id }}"
+        ec2_elbs: "clerk1"
+        state: present

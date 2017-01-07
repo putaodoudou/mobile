@@ -1,0 +1,4 @@
+# ansible-galaxy install -r requirements.yml
+- src: geerlingguy.memcached
+- src: geerlingguy.git
+- src: angstwad.docker_ubuntu

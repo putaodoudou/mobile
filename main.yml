@@ -1,0 +1,4 @@
+---
+# run "ansible-playbook main.yml" with defaults
+- include: playbooks/ec2lib.yml
+- include: playbooks/ec2destroy.yml

@@ -1,0 +1,9 @@
+---
+instance_type: 't2.micro'
+region: 'us-west-2'
+aws_zone: 'a'
+ami_name: 'ami-01f05461'
+sec_group: 'launch-wizard-1'
+pem_name: 'new.pem'
+vpc_name: 'subnet-9f5a1fe9'
+pem_local_location: '/Users/Shared/new.pem'

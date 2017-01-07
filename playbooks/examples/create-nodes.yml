@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    instance_type: 't2.micro'
+    region: 'us-west-2'
+    aws_zone: 'a'
+    ami_name: 'ami-01f05461'
+    sec_group: 'launch-wizard-1'
+    pem_name: 'new.pem'
+    vpc_name: 'subnet-9f5a1fe9'
+  tasks:
+
+  # aws ec2 run-instances --image-id ami-01f05461  --security-groups lairalarm --key-name new.pem --count 3 --instance-type t2.micro
+  - name: Launch instance (Ubuntu 14.04 hvm)
+    ec2:
+        key_name: "{{ pem_name }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ ami_name }}"
+        wait: yes
+        group: "{{ sec_group }}"
+        count: 2
+        vpc_subnet_id: "{{ vpc_name }}"
+        region: "{{ region }}"
+        assign_public_ip: yes

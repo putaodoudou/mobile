@@ -1,0 +1,16 @@
+---
+# if new pem key is need to be added one has to be root . Run below with an allowed sudoer
+# ie:  ansible-playbook playbooks/sshlib.yml  --ask-sudo-pass
+- hosts: localhost
+  connection: local
+  sudo: yes
+  user: root
+  tasks:
+
+  - name: Add ssh key
+    command: ssh-add "{{ pem_local_location }}"
+    notify: rerun once
+
+  handlers:
+    - name: rerun once
+      command: ssh-add "{{ pem_local_location }}"

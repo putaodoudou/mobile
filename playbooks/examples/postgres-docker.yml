@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+
+  vars:
+    database_user: admin
+    database_password: admin
+  tasks:
+  - name: start the postgres container
+    docker:
+      image: postgres:9.4
+      name: postgres
+      publish_all_ports: True
+      env:
+        POSTGRES_USER: "{{ database_user }}"
+        POSTGRES_PASSWORD: "{{ database_password }}"
+
