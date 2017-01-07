@@ -57,7 +57,7 @@ Search Many
     ...     Clear Text  id=sb_form_q
     \   Run Keyword If  '${lib}' == 'Selenium2Library'      Run Keyword And Ignore Error
     ...     Clear Element Text          id=sb_form_q
-    \   ${random}   Generate Random String  5   [NUMBERS]!@#$%^&*()
+    \   ${random}   Generate Random String  5   ABCDEFGHIJKLMNOPQRSTUVWXYZ
     \   Wait Until Page Contains Element    id=sb_form_q
     \   Run Keyword And Ignore Error	Input text          id=sb_form_q     ${random}\n
     \   Log	${random}
@@ -136,12 +136,15 @@ Login mobile
     [Documentation]	Login to bing with credentials only for iOS
     Log Source
     Wait Until Page Contains Element		id=i0116    timeout=${to}
+
     Input text          id=i0116        ${login}
     Click Element  id=idSIButton9
 
+    Wait Until Page Contains Element		id=i0118    timeout=${to}
     Input text          id=i0118        ${password}
     Click Element       id=idSIButton9
-    builtin.sleep       5
+    # TODO for hi mobile latency
+    builtin.sleep       15
     Set Test Variable      ${bingsignin}
     ...             https://bing.com/search?q=top+stories&filters=segment:%22popularnow.carousel
     Go to Generic
@@ -209,21 +212,21 @@ Repeat Multiple iOS Connections
     ...     Search iOS Browser Port
 
 Fullfill Daily Activities Legacy
-    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 credit
+    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 points
     [Arguments]     ${url}
     Import Library	Selenium2Library
     #Open Browser    ${url}  ${BROWSER}
     Go to Generic   ${url}      Selenium2Library
     Log Source
-    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1[0] credit
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 1[0] points
     Log     ${creditstatus}
     Log Source
     Run Keyword If  '${creditstatus[0]}' == 'PASS'
-    ...     Run Keywords    Click Element   partial link=0 of 1[0] credit
+    ...     Run Keywords    Click Element   partial link=0 of 1[0] points
     ...     AND             Log Source
 
 Fullfill Daily Activities
-    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 credit
+    [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 points
     [Arguments]     ${url}
     Import Library	Selenium2Library
     #Open Browser    ${url}  ${BROWSER}
@@ -238,7 +241,7 @@ Fullfill Daily Activities
 
 Quiz
     [Documentation]     Welcome tutorial requires clicking next
-    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 3[0] credit
+    ${creditstatus}=        Run Keyword And Ignore Error	Page Should Contain    0 of 3[0] points
     Log     ${creditstatus}
     Log Source
     Run Keyword If  '${creditstatus[0]}' == 'PASS'
@@ -260,17 +263,17 @@ Welcome Tutorial
 Edge support
     [Documentation]    Edge requires clicking next
     ${status}=        Run Keyword And Ignore Error	Page Should Contain
-    ...                     Earn 1[0] credit
+    ...                     Earn 1[0] points
     Log     ${status}
     Run Keyword If  '${status[0]}' == 'PASS'
-    ...     Click Element   partial link=Earn 1[0] credit
+    ...     Click Element   partial link=Earn 1[0] points
     Log Source
 
     ${status}=        Run Keyword And Ignore Error	Page Should Contain
     ...                     1[0] point
     Log     ${status}
     Run Keyword If  '${status[0]}' == 'PASS'
-    ...     Click Element   partial link=1 point
+    ...     Click Element   partial link=1[0] point
     Log Source
 
 Suspended
@@ -362,3 +365,17 @@ S Search
     [Documentation]	Click swagbucks search
     Wait Until Page Contains            Daily Search        timeout=${to}
     Run Keyword And Ignore Error        Click Element   partial link=Daily Search
+
+Swagbuck Init
+    [Tags]    Mobile    NONBLOCK
+    Import Library	Selenium2Library    run_on_failure=Run Diag
+    Set Test Variable   ${capabilities}    ${NONE}
+    Set Test Variable   ${remote_url}			${NONE}
+    Set Test Variable      ${url}
+    ...             http://www.swagbucks.com/p/login
+    Open Browser    ${url}   ${BROWSER}    desired_capabilities=${DC}
+
+    Go to Generic   ${url}      Selenium2Library
+    Set Library Search Order    Selenium2Library
+
+    Login swagbucks
