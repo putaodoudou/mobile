@@ -115,6 +115,18 @@ Release Build test:
       0) Upon checkin, check below to make sure no issues in docker hub release tests
          https://hub.docker.com/r/kenney/mobile/builds/
 
-      1) for manually executing docker one must use this work around for symbolic links in docker-dir/
-         read https://github.com/docker/docker/issues/6094#issuecomment-54556720
+      1) for manually executing docker one can use this work around for symbolic links,
+         read https://github.com/docker/docker/issues/6094#issuecomment-54556720. This prevent the error message:
+         "lstat bing.txt.robot: no such file or directory"
           tar -czh . | docker build -
+
+      2) docker-dir doc is in https://blog.jetbrains.com/idea/2015/03/docker-support-in-intellij-idea-14-1/
+         Along with setting.jar, one can test on their docker container with:
+
+               Dockerfile
+               bashrc
+               bing.resource.robot
+               bing.txt.robot
+               docker-compose.yml
+               requirements.txt
+               setup.py
