@@ -1,0 +1,27 @@
+# see https://karthikv.net/articles/circleci-docker-flow/
+machine:
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  services:
+    - docker
+    
+dependencies:
+  override:
+    - docker build -t kenney/mobile .
+
+test:
+  override:
+    - nosetests
+    
+  post:
+    - env
+    - docker export test | gzip - > $CIRCLE_ARTIFACTS/build${CIRCLE_TAG}.tar.gz
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - /bin/true
+      # TODO push if successful
+      # - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      # - docker push kenney/vagrant-alpine
