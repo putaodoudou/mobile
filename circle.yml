@@ -12,7 +12,9 @@ dependencies:
 
 test:
   override:
-    - nosetests
+    - for i in `seq 0 3`; do docker run -t kenney/mobile xvfb-run pybot -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10  -v pVersion:8.1  -d outputs  bing.txt.robot; done
+    #- docker run -ti kenney/mobile pybot -e mobile -i NONBLOCK -v BROWSER:firefox -v login:abc -d /tmp bing.txt.robot
+    #- nosetests
     
   post:
     - env
