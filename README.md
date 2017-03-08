@@ -83,6 +83,11 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
 
 Troubleshooting:
 
+    Openssl might report:
+      output: digital envelope routines:EVP_DecryptFinal_ex:bad decrypt:evp_enc.c:539:
+      reason: openssl aes-256-cbc -e -in secrets -out secret-env-cipher -k "publickeystring" will fail when try to decrypt.
+              no error given but during decryption it will give error.
+
     Older MacOS 10.6 can have below error and solution:
       1) TypeError: wait_until_page_contains_element() keywords must be strings
          use Run and igore
