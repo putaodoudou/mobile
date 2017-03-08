@@ -19,9 +19,4 @@ ADD bashrc /data/.bashrc
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-
-# TODO save credential
-RUN echo pybot -e mobile -i NONBLOCK -v BROWSER:firefox -v login:${LOGIN} \
-      -v DC:"browserName:firefox,version:41" -v password:${PASS} \
-      -v device:"iPhone 6" -v DEVICE_NAME:"iPhone 6" -v deviceName:"iPhone 6" \
-      -v pVersion:8.1  -d /tmp bing.txt.robot
+ENTRYPOINT sh
