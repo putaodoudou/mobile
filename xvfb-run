@@ -141,7 +141,7 @@ fi
 # If the user did not specify an X authorization file to use, set up a temporary
 # directory to house one.
 if [ -z "$AUTHFILE" ]; then
-    XVFB_RUN_TMPDIR="$(mktemp --directory --tmpdir $PROGNAME.XXXXXX)"
+    XVFB_RUN_TMPDIR="$(mktemp -d /tmp/$PROGNAME.XXXXXX)"
     AUTHFILE=$(mktemp -p "$XVFB_RUN_TMPDIR" Xauthority.XXXXXX)
 fi
 
