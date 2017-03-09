@@ -20,4 +20,4 @@ ADD xvfb-run /usr/bin/xvfb-run
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-ENTRYPOINT sh
+ENTRYPOINT [ "xvfb-run" , "pybot" ]
