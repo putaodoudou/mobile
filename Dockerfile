@@ -1,4 +1,4 @@
-FROM kenney/robot-firefox:latest
+FROM kenney/robot-firefox-alpine:latest
 
 MAINTAINER Kenney He <kenneyhe@gmail.com>
 
@@ -20,4 +20,4 @@ ADD xvfb-run /usr/bin/xvfb-run
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-ENTRYPOINT [ "xvfb-run" , "pybot" ]
+#ENTRYPOINT [ "xvfb-run" , "pybot" ]
