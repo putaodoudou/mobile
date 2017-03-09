@@ -1,0 +1,21 @@
+version: '2'
+services:
+  # chrome driver with xvfb
+  # appium with android emulator
+  appium-emulator:
+    image: rgonalo/appium-emulator
+
+  mobile:
+    build: .
+    depends_on:
+     - appium-emulator
+
+    ports:
+     - "4723:4723"
+
+    command:
+     - env
+     - cat /etc/hosts
+
+    links:
+      - appium-emulator:app
