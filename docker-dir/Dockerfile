@@ -1,4 +1,4 @@
-FROM kenney/robot-firefox:latest
+FROM kenney/robot-firefox-alpine:latest
 
 MAINTAINER Kenney He <kenneyhe@gmail.com>
 
