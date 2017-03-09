@@ -14,6 +14,7 @@ WORKDIR	/data
 ADD bing.txt.robot /data/
 ADD bing.resource.robot /data/
 ADD bashrc /data/.bashrc
+ADD xvfb-run /usr/bin/xvfb-run
 
 # requirement list like pabot
 RUN pip install --upgrade pip
