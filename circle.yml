@@ -12,16 +12,7 @@ dependencies:
 
 test:
   override:
-    - docker run -t kenney/mobile xvfb-run pybot -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[0]} -v password:${PLIST[0]} -v to:10 -v pVersion:8.1 -d outputs -t "*PC*" bing.txt.robot:
-        background: true
-        timeout: 1200
-    - docker run -t kenney/mobile xvfb-run pybot -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[1]} -v password:${PLIST[1]} -v to:10 -v pVersion:8.1 -d outputs -t "*PC*" bing.txt.robot:
-        background: true
-        timeout: 1200
-    - docker run -t kenney/mobile xvfb-run pybot -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[2]} -v password:${PLIST[2]} -v to:10 -v pVersion:8.1 -d outputs -t "*PC*" bing.txt.robot:
-        timeout: 1200
-    #- for i in `seq 0 3`; do docker run -t kenney/mobile xvfb-run pybot -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10  -v pVersion:8.1  -d outputs  bing.txt.robot; done
-    #- docker run -ti kenney/mobile pybot -e mobile -i NONBLOCK -v BROWSER:firefox -v login:abc -d /tmp bing.txt.robot
+    - for i in `seq 0 3`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -d outputs bing.txt.robot; done
     #- nosetests
     
   post:
