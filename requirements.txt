@@ -1,1 +1,1 @@
-docker-dir/requirements.txt
+robotframework-pabot
