@@ -28,5 +28,5 @@ deployment:
     # push to master of private repo
     branch: androidsim
     commands:
-      - docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - docker login -e "kenneyhe@gmail.com" -u $DOCKER_USER -p $DOCKER_PASS
       - docker push kenney/mobile:android
