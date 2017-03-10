@@ -7,14 +7,15 @@ machine:
     
 dependencies:
   override:
-    - docker build -t kenney/mobile .
     - openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
 
 test:
   override:
-    - for i in `seq 0 0`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t "Search*iOS*" -d outputs bing.txt.robot; done:
+    - docker-compose up --build:
+        background: true
+    - docker-compose run app
         timeout: 1200
-    #- nosetests
+    - docker-compose down
     
   post:
     - env
@@ -26,4 +27,4 @@ deployment:
     branch: master
     commands:
       - docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push kenney/mobile
+      - docker push kenney/mobile:android

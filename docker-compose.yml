@@ -1,21 +1,40 @@
 version: '2'
 services:
-  # chrome driver with xvfb
   # appium with android emulator
-  appium-emulator:
+  appemulator:
+
+    container_name: emulator
+
     image: rgonalo/appium-emulator
 
-  mobile:
+    expose:
+      - 4723
+
+  app:
+
     build: .
+
     depends_on:
-     - appium-emulator
+      - appemulator
+
+    environment:
+      - REMURL:'http://appemulator:4723/wd/hub'
+      - USRS:${ULIST}
+      - PWS:${PLIST}
+
+    container_name: app
 
     ports:
-     - "4723:4723"
+      - "4723:4723"
 
-    command:
-     - env
-     - cat /etc/hosts
+    # make sure emulator linked
+    command: ping -c 1 appemulator
+    command: ls /data
+    # example
+    # command: xvfb-run pybot -v REMOTE_URL:'${REMURL}' -v BROWSER:firefox -v login:${USRS[0]} -v password:${PWS[0]} -v to:10 -d outputs -t '*Android*' bing.txt.robot
+
+    # below for debugging
+    # command: sh
 
     links:
-      - appium-emulator:app
+      - appemulator
