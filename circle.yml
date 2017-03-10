@@ -17,7 +17,6 @@ test:
         background: true
     - docker-compose run app:
         timeout: 1200
-    - docker-compose down
     
   post:
     - env
@@ -29,4 +28,7 @@ deployment:
     branch: androidsim
     commands:
       - docker login -e "kenneyhe@gmail.com" -u $DOCKER_USER -p $DOCKER_PASS
+      - docker commit -m "latest checkin" app kenney/mobile:android
       - docker push kenney/mobile:android
+      - docker-compose down
+
