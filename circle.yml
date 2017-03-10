@@ -26,7 +26,7 @@ test:
 deployment:
   hub:
     # push to master of private repo
-    branch: master
+    branch: androidsim
     commands:
       - docker login -u $DOCKER_USER -p $DOCKER_PASS
       - docker push kenney/mobile:android
