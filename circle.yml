@@ -13,7 +13,7 @@ test:
   override:
     - docker-compose up --build:
         background: true
-    - docker-compose run app
+    - docker-compose run app:
         timeout: 1200
     - docker-compose down
     
