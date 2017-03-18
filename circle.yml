@@ -17,6 +17,7 @@ dependencies:
     - openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
 
   post:
+    - sudo apt-get update
     - sudo apt-get install -y x11vnc
     - x11vnc -forever -nopw:
         background: true
