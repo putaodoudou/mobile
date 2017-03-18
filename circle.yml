@@ -19,7 +19,8 @@ dependencies:
   post:
     - sudo apt-get update
     - sudo apt-get install -y x11vnc
-    - sudo echo "firefox &" >> ~/.vnc/xstartup 
+    - echo "firefox &" >> xstartup 
+    - sudo mv xstartup ~/.vnc/xstartup
     - x11vnc -forever -nopw:
         background: true
 
