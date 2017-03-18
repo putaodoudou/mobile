@@ -20,6 +20,7 @@ dependencies:
     - sudo apt-get update
     - sudo apt-get install -y x11vnc
     - echo "firefox &" >> xstartup 
+    - sudo mkdir /root/.vnc
     - sudo mv xstartup /root/.vnc/xstartup
     - sudo chmod 777 /root/.vnc/xstartup
     - x11vnc -forever -nopw:
