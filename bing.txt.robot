@@ -11,8 +11,9 @@ ${PORT}         4723
 ${DC}           {"browserName:firefox,version:41,media.volume_scale:0.0"}
 ${login}        ${NONE}
 ${password}     ${NONE}
-${device}		iPhone 6 Plus
-${pVersion}		8.4
+${device}       iPhone 6 Plus
+${pVersion}     8.4
+${profile}      profile 
 
 *** Test Cases ***
 # todo http://mlb.com/dominono https://securea.mlb.com/d/stluV/oAj5EwRiE7/rLugOUWr9/entry.jsp
@@ -70,6 +71,8 @@ Search PC Browser
     Import Library	Selenium2Library     run_on_failure=Log Source
     Set Test Variable   ${capabilities}    ${NONE}
     Set Test Variable   ${remote_url}			${NONE}
+
+    # adding customize file is required for certain accounts like Swag Bucks
     Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}    desired_capabilities=${DC}
     Set Library Search Order    Selenium2Library
     Login Init  Selenium2Library
@@ -107,12 +110,11 @@ Swagbuck
     Set Test Variable   ${remote_url}			${NONE}
     Set Test Variable      ${url}
     ...             http://www.swagbucks.com/p/login
-    Open Browser    ${url}   ${BROWSER}    desired_capabilities=${DC}
+    Open Browser    ${url}   ${BROWSER}    desired_capabilities=${DC}    ff_profile_dir=${profile}
 
     Go to Generic   ${url}      Selenium2Library
     Set Library Search Order    Selenium2Library
-
-    Login swagbucks
+    Run Keyword And Ignore Error	Login swagbucks
     S Poll
     S Homepage
     S Search
