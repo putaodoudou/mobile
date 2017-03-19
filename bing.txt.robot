@@ -13,7 +13,7 @@ ${login}        ${NONE}
 ${password}     ${NONE}
 ${device}       iPhone 6 Plus
 ${pVersion}     8.4
-${profile}      profile 
+${profile}      /data/profile 
 
 *** Test Cases ***
 # todo http://mlb.com/dominono https://securea.mlb.com/d/stluV/oAj5EwRiE7/rLugOUWr9/entry.jsp
