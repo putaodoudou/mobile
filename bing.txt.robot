@@ -116,20 +116,20 @@ Swagbuck
     Set Library Search Order    Selenium2Library
     Run Keyword And Ignore Error	Login swagbucks
     S Poll
-    S Homepage
-    S Search
-    S Homepage
-    ${status}=    Run Keyword And Ignore Error   S Crave
-    Run Keyword If  '${status[0]}' != 'PASS'
-    ...     Fail
+    #S Homepage
+    #S Search
+    #S Homepage
+    #${status}=    Run Keyword And Ignore Error   S Crave
+    #Run Keyword If  '${status[0]}' != 'PASS'
+    #...     Fail
 
-    ${status}=    Run Keyword And Ignore Error   S Crave
-    Run Keyword If  '${status[0]}' != 'PASS'
-    ...     Fail
+    #${status}=    Run Keyword And Ignore Error   S Crave
+    #Run Keyword If  '${status[0]}' != 'PASS'
+    #...     Fail
 
-    ${status}=    Run Keyword And Ignore Error   S Crave
-    Run Keyword If  '${status[0]}' != 'PASS'
-    ...     Fail
+    #${status}=    Run Keyword And Ignore Error   S Crave
+    #Run Keyword If  '${status[0]}' != 'PASS'
+    #...     Fail
 
-    builtin.sleep   5
+    #builtin.sleep   5
     [TearDown]  Cleanup     Selenium2Library
