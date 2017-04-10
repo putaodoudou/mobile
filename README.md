@@ -19,7 +19,14 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     # copy below to terminal
     sudo ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     sudo brew install Caskroom/cask/android-studio
-
+    
+  Virtual Environment if necessary:
+    virtualenv venv -p /usr/local/bin/python
+    alias pip=venv/bin/pip
+    alias python=venv/bin/python
+    
+    # Then, go to section you need
+    
   Robot Framework installation:
   
     # standard PC support
@@ -38,7 +45,8 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
   Mobile support:
 
     (see https://github.com/kenneyhe/mobile.git)
-    1) pip install robotframework-appiumlibrary
+    1) 
+       pip install robotframework-appiumlibrary
     2) download appium and install
 
     _# iOS_
