@@ -127,7 +127,7 @@ Login PC
     ...             AND             Verify Email        2501390707
     ...             AND             Verify Code         1234
     Run Keyword If 	${status} == 'None'	Choose Ok On Next Confirmation
-    ...		    ELSE    Wait Until Page Contains    Bing Rewards
+    ...		    ELSE    Wait Until Page Contains    Rewards
 
 Login mobile
     [Documentation]	Login to bing with credentials only for iOS
