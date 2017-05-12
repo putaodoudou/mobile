@@ -59,7 +59,7 @@ Search Many
     \   Run Keyword And Ignore Error	Input text          id=sb_form_q     ${random}\n
     \   Log	${random}
     \   Log Many	${to}	${count}
-    \   Wait Until Page Contains     Feedback   timeout=${to}
+    \   Wait Until Page Contains     Privacy   timeout=${to}
     #FIXME for debugging \   Builtin.Sleep	5
     Go to Generic   ${bingsignin}%22+scenario:%22carousel%22&FORM=ML11Z9&CREA=ML11Z9&rnoreward=1
     ...             ${lib}
@@ -165,7 +165,7 @@ Search One
     Keyword And Ignore Error    Wait Until Page Contains Element    id=sb_form_q
     Run Keyword And Ignore Error    Input text          id=sb_form_q     ${searchword}
     Run Keyword And Ignore Error    Click Element       id=sb_form_go
-    Wait Until Page Contains     Feedback   timeout=${to}
+    Wait Until Page Contains     Privacy   timeout=${to}
 
 Fullfill Daily Activities Legacy
     [Documentation]     Regression Test Click through all daily activities with e/Earn 1 or 10 credit
