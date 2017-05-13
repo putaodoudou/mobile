@@ -116,8 +116,8 @@ Swagbuck
     Set Library Search Order    Selenium2Library
     Run Keyword And Ignore Error	Login swagbucks
     S Poll
-    #S Homepage
-    #S Search
+    S Homepage
+    S Search
     #S Homepage
     #${status}=    Run Keyword And Ignore Error   S Crave
     #Run Keyword If  '${status[0]}' != 'PASS'
