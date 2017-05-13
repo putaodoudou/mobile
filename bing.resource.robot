@@ -275,8 +275,8 @@ S Homepage
 
     ${status}=  Run Keyword And Ignore Error        Select Window       id=html
     ${status}=  Run Keyword And Ignore Error        Click Element       id=swagButtonModalExit
-
-    Wait Until Element Is Visible       link=Search   timeout=10
+    builtin.sleep   10
+    #Wait Until Element Is Visible       link=Search   timeout=10
     Run Keyword And Ignore Error        Click Button    sbMainNavToggle
 
 S Poll
