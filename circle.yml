@@ -26,12 +26,15 @@ dependencies:
     - x11vnc -forever -nopw:
         background: true
     - tar xvfz profile.tar.gz
+    - tar xvfz imacros.tar.gz
 
 test:
   override:
     - for i in `seq 0 2`; do docker run -v "${PWD}":/data -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${SBLIST[${i}]} -v password:${SBPLIST[${i}]} -v to:10 -v pVersion:8.1 -t Swagbuck -d outputs bing.txt.robot; done:
         timeout: 1200
     #- nosetests
+    #run imacros and run below (copied from internet)  
+    #- firefox -profile profile http://run.imacros.net/?m=crave.iim  
     
   post:
     - env
