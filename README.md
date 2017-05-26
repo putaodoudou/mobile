@@ -61,7 +61,31 @@ PC/Mobile robotframework support for iOS and Android testing. Install all below 
     3e) bring up search bar in virtual device
     3f) put in /Users/khe/Library/Android/sdk in Appium's android advance setting
     3g) run RB test files
-
+    
+  Using iMacros on firefox for testing and for running standalone without Robotframework:
+  
+    1)  Per http://wiki.imacros.net/Main_Page :
+    
+     start "C:\Program Files\Mozilla Firefox\firefox.exe" imacros://run/?m=crave3.iim  -loop 1
+    
+    or
+    
+     firefox http://run.imacros.net/?m=name_of_the_macro.iim
+     
+     
+  Using iMacros with Python API for testing and for running standalone without Robotframework:
+ 
+    1) Per http://wiki.imacros.net/Linux:
+    
+    #!/usr/bin/python
+    import imacros
+    iret = imacros.iimInit("-fx", True)
+    iret = imacros.iimPlay("CODE:URL GOTO=http://www.iopus.com")
+    iret = imacros.iimExit()
+    
+    
+  
+  
   Installing IE with grid for development:
   
     1) Download Virtual Machine with latest IE:
