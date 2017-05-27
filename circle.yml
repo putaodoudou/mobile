@@ -27,6 +27,7 @@ dependencies:
         background: true
     - tar xvfz profile.tar.gz
     - tar xvfz imacros.tar.gz
+    - mkdir -p ~/iMacros/Macros
     - cp *.iim ~/iMacros/Macros
     
 test:
