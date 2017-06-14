@@ -13,7 +13,7 @@ dependencies:
     # 3) remove ~/.vnc/xstartup that might be causing grey screen
     # - echo "firefox &" >> ~/.vnc/xstartup 
     # - vnc4server -geometry 1280x1024 -depth 24
-    - docker build -t kenney/mobile .
+    - docker build -t kenney/mobile:swarm .
     # insert bring you own swarm here
     
   post:
@@ -28,11 +28,9 @@ dependencies:
 
 test:
   override:
-    - for i in `seq 1 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t "*PC*" -d outputs bing.txt.robot; done:
+    - docker stack deploy -c compose.yml pclist
         timeout: 1200
-    #- for i in `seq 0 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${SBLIST[${i}]} -v password:${SBPLIST[${i}]} -v to:10 -v pVersion:8.1 -t Swagbuck -d outputs bing.txt.robot; done:
-    #    timeout: 1200
-    #- nosetests
+    - docker stack rm pclist
     
   post:
     - env
@@ -44,4 +42,4 @@ deployment:
     branch: master
     commands:
       - docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push kenney/mobile
+      - docker push kenney/mobile:swarm
