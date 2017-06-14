@@ -1,0 +1,31 @@
+# pre-run:  docker secret create ... ,
+# With API version: 1.30
+# run via: docker stack deploy --with-registry-auth -c compose.yml test
+# https://docs.docker.com/engine/reference/commandline/service_create/#create-a-service-with-secrets
+version: "3.1"
+
+services:
+  worker:
+    image: "kenney/mobile"
+
+    secrets:
+      - source: "password"
+        mode: 0777
+      - source: "password1"
+        mode: 0777
+      - source: "password2"
+        mode: 0777
+
+    deploy:
+      replicas: 1
+
+secrets:
+  password:
+    external:
+      name: "KPASS"
+  password1:
+    external:
+      name: "TRACYPASS"
+  password2:
+    external:
+      name: "TRACYPASS1"
