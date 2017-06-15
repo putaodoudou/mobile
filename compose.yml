@@ -1,31 +1,45 @@
 # pre-run:  docker secret create ... ,
 # With API version: 1.30
 # run via: docker stack deploy --with-registry-auth -c compose.yml test
+# destroy via:  docker stack  rm test
 # https://docs.docker.com/engine/reference/commandline/service_create/#create-a-service-with-secrets
 version: "3.1"
 
 services:
   worker:
-    image: "kenney/mobile"
+    image: "kenney/mobile:swarm"
 
     secrets:
-      - source: "password"
-        mode: 0777
-      - source: "password1"
-        mode: 0777
-      - source: "password2"
+      - source: "TRACYPASS"
         mode: 0777
 
     deploy:
       replicas: 1
+      restart_policy:
+        condition: none
+    command: "/usr/bin/xvfb-run pybot /data/swarm.robot"
+
+
+  worker1:
+      image: "kenney/mobile:swarm"
+
+      secrets:
+        - source: "TRACYPASS1"
+          mode: 0777
+
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: none
+      command: "/usr/bin/xvfb-run pybot /data/swarm.robot"
 
 secrets:
-  password:
+  KPASS:
     external:
       name: "KPASS"
-  password1:
+  TRACYPASS:
     external:
       name: "TRACYPASS"
-  password2:
+  TRACYPASS1:
     external:
       name: "TRACYPASS1"
