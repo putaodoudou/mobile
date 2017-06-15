@@ -1,0 +1,9 @@
+version: 2
+# per: https://circleci.com/docs/2.0/sample-config/#nav-button
+jobs:
+  build:
+    working_directory: /
+    docker:
+      - image: kenney/robot-firefox
+    steps:
+      - checkout
