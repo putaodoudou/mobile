@@ -26,12 +26,6 @@ dependencies:
         background: true
 
 test:
-  override:
-    # uncomment once circleci support docker swarm feature
-    #- docker stack deploy -c compose.yml pclist
-    #    timeout: 1200
-    #- docker stack rm pclist
-    
   post:
     - env
     - docker export test | gzip - > $CIRCLE_ARTIFACTS/build${CIRCLE_TAG}.tar.gz
