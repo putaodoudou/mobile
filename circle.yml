@@ -14,8 +14,7 @@ dependencies:
     # - echo "firefox &" >> ~/.vnc/xstartup 
     # - vnc4server -geometry 1280x1024 -depth 24
     - docker build -t kenney/mobile:swarm .
-    # insert bring you own swarm here
-    
+
   post:
     - sudo apt-get update
     - sudo apt-get install -y x11vnc
@@ -28,9 +27,10 @@ dependencies:
 
 test:
   override:
-    - docker stack deploy -c compose.yml pclist
-        timeout: 1200
-    - docker stack rm pclist
+    # uncomment once circleci support docker swarm feature
+    #- docker stack deploy -c compose.yml pclist
+    #    timeout: 1200
+    #- docker stack rm pclist
     
   post:
     - env
