@@ -66,19 +66,7 @@ Search iOS Browser
     [TearDown]  Cleanup     AppiumLibrary
 
 Search PC Browser
-    [Documentation]     Search PC browsers 15 times with random strings
-    [Tags]  PC      NONBLOCK
-    Import Library	Selenium2Library     run_on_failure=Log Source
-    Set Test Variable   ${capabilities}    ${NONE}
-    Set Test Variable   ${remote_url}			${NONE}
-
-    # adding customize file is required for certain accounts like Swag Bucks
-    Open Browser    https://bing.com/rewards/dashboard    ${BROWSER}    desired_capabilities=${DC}
-    Set Library Search Order    Selenium2Library
-    Login Init  Selenium2Library
-    Login PC
-    Search Many     32      Selenium2Library
-    [TearDown]  Cleanup     Selenium2Library
+    Search on PC    ${BROWSER}
 
 Self Test
     Import Library	Selenium2Library
