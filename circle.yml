@@ -35,12 +35,12 @@ test:
     - for i in `seq 0 2`; do docker run -v "${PWD}":/data -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${SBLIST[${i}]} -v password:${SBPLIST[${i}]} -v to:10 -v pVersion:8.1 -t Swagbuck -d outputs bing.txt.robot; done:
         timeout: 1200
     #run imacros and run below (copied from internet)  
-    - firefox --profile profile imacros://run/?m=watch.iim
+    - firefox --profile profile imacros://run/?m=watch.iim:
         timeout: 700
     - tar xvfz profile1.tar.gz
     - for i in `seq 0 2`; do docker run -v "${PWD}":/data -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${SBLIST[${i}]} -v password:${SBPLIST[${i}]} -v to:10 -v pVersion:8.1 -t Swagbuck -d outputs bing.txt.robot; done:
         timeout: 1200
-    - firefox --profile profile imacros://run/?m=watch.iim
+    - firefox --profile profile imacros://run/?m=watch.iim:
         timeout: 700
     #- firefox --profile profile imacros://run/?m=crave.iim
     
