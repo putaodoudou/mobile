@@ -13,7 +13,6 @@ dependencies:
     # 3) remove ~/.vnc/xstartup that might be causing grey screen
     # - echo "firefox &" >> ~/.vnc/xstartup 
     # - vnc4server -geometry 1280x1024 -depth 24
-    - docker build -t kenney/mobile .
     - openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
 
   post:
