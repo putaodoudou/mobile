@@ -5,19 +5,18 @@ jobs:
     working_directory: ~/standalone
     docker:
       - image: docker:17.03-git
-      - image: centurylink/openssl
     steps:
       - checkout
       - setup_remote_docker    
       - run:
           name: Build container
           command: docker build -t kenney/mobile .
-      - run: 
-          name: Use secrets
-          command: openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
-      - run:
-          name: Run tests
-          command: for i in `seq 0 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t  "Fullfill All" -d outputs bing.txt.robot; done
+      - run: |
+          apk add --no-cache --update openssl bash
+          openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
+          bash
+          . ~/.circlerc
+          for i in `seq 1 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t  "Fullfill All" -d outputs bing.txt.robot; done
       
 workflows:
   version: 2
