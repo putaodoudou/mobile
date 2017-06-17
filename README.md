@@ -96,7 +96,13 @@ Troubleshooting:
     
     Use below to help install patches from github:
       1) http://stackoverflow.com/questions/20101834/pip-install-from-github-repo-branch
-
+      
+    Some symlinks can cause trouble with filesytem and requires building docker container with tar:
+      1) cd docker-dir
+      2) cd docker-dir
+      3) ln -sf ../*robot
+      4) tar -czh . | docker build -t kenney/mobile -
+      
 Unit test:
 
       0) Use java7 with older MacOSX by compiling https://blogs.oracle.com/arungupta/entry/build_open_jdk_7_on
