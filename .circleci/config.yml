@@ -9,11 +9,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: look for all
-          command: whereis yum apt-get tar
-      - run:
           name: install tar
-          command: yum install -y tar
+          command: yum install -y tar || true
       - run:
           name: Install Docker client
           command: |
@@ -24,7 +21,7 @@ jobs:
             mv /tmp/docker/* /usr/bin                
       - run:
           name: Build container
-          command: docker build -t kenney/mobile .
+          command: docker build -t kenney/mobile . || true
           
   buildswarm:
     working_directory: ~/swarm
@@ -34,11 +31,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: look for all
-          command: whereis yum apt-get tar
-      - run:
           name: install tar
-          command: yum install -y tar
+          command: yum install -y tar || true
       - run:
           name: Install Docker client
           command: |
@@ -49,7 +43,7 @@ jobs:
             mv /tmp/docker/* /usr/bin                  
       - run:
           name: Build container
-          command: docker build -t kenney/mobile:swarm .
+          command: docker build -t kenney/mobile:swarm . || true
 workflows:
   version: 2
   build_and_test:
