@@ -23,7 +23,7 @@ jobs:
       # multiple images for connecting ports of swarms of selenium grid, appium, others can be done...
       # https://circleci.com/docs/2.0/executor-types/
       # below is only because of private docker
-      - run: docker build -t kenney/mobile .
+      # need to pull private image pushed with swarm secrets not build again
       - run: docker images
           
   buildswarm:
