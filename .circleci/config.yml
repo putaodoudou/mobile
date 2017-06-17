@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Build container
           command: docker build -t kenney/mobile .
+  unittest:
+    steps:
+      - run: nosetests
           
   buildswarm:
     working_directory: ~/swarm
@@ -22,9 +25,13 @@ jobs:
       - run:
           name: Build container
           command: docker build -t kenney/mobile:swarm .
+
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
       - buildswarm
+      - unittest
+          requires:
+            - build
