@@ -20,6 +20,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker version
+      - run: docker images
           
   buildswarm:
     working_directory: ~/swarm
