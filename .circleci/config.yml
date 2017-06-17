@@ -25,6 +25,20 @@ jobs:
       # below is only because of private docker
       # need to pull private image pushed with swarm secrets not build again
       - run: docker images
+      
+  deployment:
+    working_directory: ~/standalone
+    docker:
+      - image: docker:17.03-dind
+    steps:
+      - run: 
+          deploy:
+            name: run health and deploy
+            command: |
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                # deploy
+                true
+              fi
           
   buildswarm:
     working_directory: ~/swarm
@@ -46,3 +60,8 @@ workflows:
       - unittest:
           requires:
             - build
+
+deployment:
+  hub:
+    branch: master
+    comma
