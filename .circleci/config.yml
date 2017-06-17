@@ -20,7 +20,7 @@ jobs:
           bash << EOF
           #!/bin/bash
           . ~/.circlerc
-          docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${USER1} -v password:${TRACYPASS1} -v to:10 -v pVersion:8.1 -t  Fullfill* -d outputs bing.txt.robot
+          for i in `seq 1 2`; do docker run -v "${PWD}":/data -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${SBLIST[${i}]} -v password:${SBPLIST[${i}]} -v to:10 -v pVersion:8.1 -t "Fullfill All" -d outputs bing.txt.robot || true; done
           EOF
 
 workflows:
