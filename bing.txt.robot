@@ -101,35 +101,3 @@ Fullfill All
     Login PC
     Fullfill Many   10   Selenium2Library    https://bing.com/rewards/dashboard
     [TearDown]  Cleanup     Selenium2Library
-
-Swagbuck
-    [Tags]    Mobile    NONBLOCK
-    Import Library	Selenium2Library
-    #run_on_failure=Log Source
-    Set Test Variable   ${capabilities}    ${NONE}
-    Set Test Variable   ${remote_url}			${NONE}
-    Set Test Variable      ${url}
-    ...             http://www.swagbucks.com/p/login
-    Open Browser    ${url}   ${BROWSER}    desired_capabilities=${DC}    ff_profile_dir=${profile}
-
-    Go to Generic   ${url}      Selenium2Library
-    Set Library Search Order    Selenium2Library
-    Run Keyword And Ignore Error	Login swagbucks
-    S Poll
-    S Homepage
-    S Search
-    #S Homepage
-    #${status}=    Run Keyword And Ignore Error   S Crave
-    #Run Keyword If  '${status[0]}' != 'PASS'
-    #...     Fail
-
-    #${status}=    Run Keyword And Ignore Error   S Crave
-    #Run Keyword If  '${status[0]}' != 'PASS'
-    #...     Fail
-
-    #${status}=    Run Keyword And Ignore Error   S Crave
-    #Run Keyword If  '${status[0]}' != 'PASS'
-    #...     Fail
-
-    #builtin.sleep   5
-    [TearDown]  Cleanup     Selenium2Library
