@@ -12,9 +12,12 @@ jobs:
           name: Build container
           command: docker build -t kenney/mobile .
           
-  unittest1:
+  unittest:
+    working_directory: ~/standalone
+    docker:
+      - image: docker:17.03-git
     steps:
-      - run: true
+      - run: docker version
           
   buildswarm:
     working_directory: ~/swarm
