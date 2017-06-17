@@ -17,12 +17,12 @@ jobs:
           apk add --no-cache --update openssl bash
           openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
       - run: |
-          cat > run.sh << EOF
+          bash << EOF
           #!/bin/bash
           . ~/.circlerc
-          for i in `seq 1 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t  Fullfill* -d outputs bing.txt.robot; done
+          docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${USER1} -v password:${TRACYPASS1} -v to:10 -v pVersion:8.1 -t  Fullfill* -d outputs bing.txt.robot
           EOF
-          cat run.sh | bash -x
+
 workflows:
   version: 2
   build_and_test:
