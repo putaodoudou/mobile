@@ -1,0 +1,23 @@
+version: 2
+# per: https://circleci.com/docs/2.0/sample-config/#nav-button
+jobs:
+  build:
+    working_directory: ~/standalone
+    docker:
+      - image: kenney/robot-firefox
+    steps:
+      - checkout
+      
+  buildswarm:
+    working_directory: ~/swarm
+    docker:
+      - image: kenney/robot-firefox-swarm
+    steps:
+      - checkout
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - buildswarm
