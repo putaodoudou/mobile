@@ -19,7 +19,7 @@ jobs:
           cat > run.sh << EOF
           #!/bin/bash
           . ~/.circlerc
-          for i in `seq 1 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t  Fullfill* -d outputs bing.txt.robot; done"
+          for i in `seq 1 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t  Fullfill* -d outputs bing.txt.robot; done
           EOF
           cat run.sh | bash -x
 workflows:
