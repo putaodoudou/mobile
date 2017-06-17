@@ -9,8 +9,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: look for yum
-          command: whereis yum apt-get
+          name: look for all
+          command: whereis yum apt-get tar
+      - run:
+          name: install tar
+          command: yum install -y tar
       - run:
           name: Install Docker client
           command: |
@@ -30,6 +33,9 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: look for all
+          command: whereis yum apt-get tar
       - run:
           name: install tar
           command: yum install -y tar
