@@ -14,6 +14,7 @@ dependencies:
     # - echo "firefox &" >> ~/.vnc/xstartup 
     # - vnc4server -geometry 1280x1024 -depth 24
     - openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
+    - docker build -t kenney/mobile . 
 
   post:
     - sudo apt-get update
