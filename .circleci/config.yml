@@ -20,6 +20,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker version
+      # multiple images for connecting ports of swarms of selenium grid, appium, others can be done...
+      # https://circleci.com/docs/2.0/executor-types/
+      # below is only because of private docker
+      - run: docker build -t kenney/mobile .
       - run: docker images
           
   buildswarm:
