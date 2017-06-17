@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/standalone
     docker:
-      - image: kenney/mobile
+      - image: kenney/robot-firefox-alpine
     steps:
       - checkout
 
