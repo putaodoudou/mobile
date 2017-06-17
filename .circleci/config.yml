@@ -28,6 +28,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+        yum install -y tar
+      - run:
           name: Install Docker client
           command: |
             set -x
