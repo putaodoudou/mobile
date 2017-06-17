@@ -4,14 +4,7 @@ jobs:
   build:
     working_directory: ~/standalone
     docker:
-      - image: kenney/robot-firefox
-    steps:
-      - checkout
-      
-  buildswarm:
-    working_directory: ~/swarm
-    docker:
-      - image: kenney/robot-firefox-swarm
+      - image: kenney/mobile
     steps:
       - checkout
 
@@ -20,4 +13,3 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - buildswarm
