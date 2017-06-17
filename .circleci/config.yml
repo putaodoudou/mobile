@@ -15,7 +15,7 @@ jobs:
   unittest:
     working_directory: ~/standalone
     docker:
-      - image: docker:17.03-git
+      - image: docker:17.03-dind
     steps:
       - run: docker version
           
