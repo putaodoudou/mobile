@@ -61,7 +61,3 @@ workflows:
           requires:
             - build
 
-deployment:
-  hub:
-    branch: master
-    comma
