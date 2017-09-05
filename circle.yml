@@ -28,7 +28,7 @@ dependencies:
 
 test:
   override:
-    - for i in `seq 1 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t "*PC*" -d outputs bing.txt.robot; done:
+    - for i in `seq 0 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t "*PC*" -d outputs bing.txt.robot; done:
         timeout: 1200
     - if [[ `date +"%a"` ==  "Tue" ]]; then for i in `seq 1 2`; do docker run -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[${i}]} -v password:${PLIST[${i}]} -v to:10 -v pVersion:8.1 -t "*PC*" -d outputs bing.txt.robot; done; fi:
         timeout: 1200
