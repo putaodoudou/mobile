@@ -2,11 +2,11 @@
 - type: parallel
   name: example_parallel_step
   steps:
-    - service: codeship_pybot
+    - service: codeship_example
       command: --version
     - service: codeship_example
       command: --help 
 - name: example_tagged_step
   tag: master
-  service: codeship_dryrun
+  service: codeship_example
   command: --dryrun  *.txt.robot 
