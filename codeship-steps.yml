@@ -3,10 +3,10 @@
   name: example_parallel_step
   steps:
     - service: codeship_example
-      command: 
+      command: -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[0]} -v password:${PLIST[0]} -v to:10 -v pVersion:8.1 -t *PC* -d outputs bing.txt.robot
     - service: codeship_example
-      command: 
+      command: -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[1]} -v password:${PLIST[1]} -v to:10 -v pVersion:8.1 -t *PC* -d outputs bing.txt.robot
 - name: example_tagged_step
   tag: master
   service: codeship_example
-  command:
+  command: -i NONBLOCK -v BROWSER:firefox -v login:${ULIST[2]} -v password:${PLIST[2]} -v to:10 -v pVersion:8.1 -t *PC* -d outputs bing.txt.robot
