@@ -3,9 +3,9 @@
   name: example_parallel_step
   steps:
     - service: codeship_example
-      command: printenv
+      command: python --version
     - service: codeship_example
-      command: pwd 
+      command: python --help 
 - name: example_tagged_step
   tag: master
   service: codeship_example
