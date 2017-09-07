@@ -3,10 +3,10 @@
   name: example_parallel_step
   steps:
     - service: codeship_example
-      command: --version
+      command: 
     - service: codeship_example
-      command: --help 
+      command: 
 - name: example_tagged_step
   tag: master
   service: codeship_example
-  command: --dryrun  *.txt.robot 
+  command:
