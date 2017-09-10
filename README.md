@@ -1,7 +1,7 @@
 # PC/mobile
 Output
 
-[![Watch the video](https://dr5mo5s7lqrtc.cloudfront.net/items/0324330p2d0H1J0J0S40/Screen Recording 2017-09-10 at 03.22 PM.gif)](https://cl.ly/3809093Q2W16)
+[![Watch the video](https://raw.githubusercontent.com/kenneyhe/mobile/master/mobile.gif)](https://cl.ly/3809093Q2W16)
 
 PC/Mobile robotframework support for iOS and Android testing. Install all below for MacOsX 10.10+
 
