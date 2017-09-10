@@ -1,4 +1,8 @@
 # PC/mobile
+Output
+
+[![Watch the video](https://avatars3.githubusercontent.com/u/12637454?v=4&s=460)](https://cl.ly/3809093Q2W16)
+
 PC/Mobile robotframework support for iOS and Android testing. Install all below for MacOsX 10.10+
 
   Download xcode 6.4 in below link and install:
