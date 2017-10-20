@@ -1,6 +1,10 @@
 # PC/mobile
-Output
+
+Coverage badge
 [![Coverage Status](https://coveralls.io/repos/github/kenneyhe/mobile/badge.svg?branch=master)](https://coveralls.io/github/kenneyhe/mobile?branch=master)
+
+
+Output
 [![Watch the video](https://raw.githubusercontent.com/kenneyhe/mobile/master/mobile.gif)](https://cl.ly/3809093Q2W16)
 
 PC/Mobile robotframework support for iOS and Android testing. Install all below for MacOsX 10.10+
