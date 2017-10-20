@@ -13,6 +13,8 @@ dependencies:
     # 3) remove ~/.vnc/xstartup that might be causing grey screen
     # - echo "firefox &" >> ~/.vnc/xstartup 
     # - vnc4server -geometry 1280x1024 -depth 24
+    - pip install coverage
+    - pip install coveralls
     - docker build -t kenney/mobile .
     - openssl aes-256-cbc -d -in secret-env-cipher -k "${KEY}" >> ~/.circlerc
 
@@ -37,7 +39,7 @@ test:
     #run imacros and run below (copied from internet) 
     - sleep 500 && killall firefox:
             background: true
-    - firefox --profile profile imacros://run/?m=watch.iim || true
+    - coverage run -p firefox --profile profile imacros://run/?m=watch.iim || true
     
   post:
     - env
@@ -48,5 +50,7 @@ deployment:
     # push to master of private repo
     branch: master
     commands:
+      - coverage report --omit '/home/ubuntu/*/*/*/*,/usr/*'
+      - coveralls
       - docker login -u $DOCKER_USER -p $DOCKER_PASS
       - docker push kenney/mobile
