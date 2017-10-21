@@ -41,10 +41,9 @@ test:
     - for i in `seq 1 1`; do docker run -v "${PWD}":/data -t kenney/mobile -i NONBLOCK -v BROWSER:firefox -v login:${SBLIST[${i}]} -v password:${SBPLIST[${i}]} -v to:10 -v pVersion:8.1 -t Swagbuck -d outputs sb.txt.robot || true; done:
         timeout: 1200
     #run imacros and run below (copied from internet) 
-    - sleep 500 && killall firefox:
+    - sleep 600 && killall firefox:
             background: true
-    - coverage run -p firefox --profile profile imacros://run/?m=watch.iim || true
-    - coverage run -p firefox --profile profile imacros://run/?m=crave.iim || true
+    - firefox --profile profile imacros://run/?m=watch.iim 
 
   post:
     - env
